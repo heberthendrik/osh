@@ -1,38 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="content-header">
-    <h1>Slider</h1>
+<header class="page-header">
+	<h2>Slider</h2>
 
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-gears"></i> Settings</a></li>
+	<div class="right-wrapper pull-right">
+		<ol class="breadcrumbs">
+			<li><a href="#"><i class="fa fa-gears"></i> Settings</a></li>
         <li><a href="{{route('settings.slider.index')}}">Slider</a></li>
-        <li class="active">Tambah</li>
-    </ol>
-</section>
+			<li><span>Tambah</span></li>
+		</ol>
 
-<section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Input Data</h3>
-                </div>
-                {!! Former::open_for_files(route('settings.slider.store'))->method('post') !!}
-                <div class="box-body">
-                    {!! Former::text('alt') !!}
+		<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
+	</div>
+</header>
+
+<!-- start: page -->
+<div class="row">
+	<div class="col-lg-12">
+		
+		{!! Former::open_for_files(route('settings.slider.store'))->method('post') !!}
+			<section class="panel">
+				<div class="panel-body">
+					
+					<div class="form-group">
+						<div class="col-md-12 text-right">
+							<a href="{{route('settings.slider.index')}}"><button type="button" class="btn btn-default">Batal</button></a>
+							<button type="submit" class="btn btn-primary">Simpan</button>
+						</div>
+					</div>
+	
+				</div>
+			</section>
+			
+			<section class="panel">
+				<header class="panel-heading">
+					<div class="panel-actions">
+						<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+						<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+					</div>
+	
+					<h2 class="panel-title">Input Data</h2>
+				</header>
+				<div class="panel-body">
+	
+					{!! Former::text('alt') !!}
                     {!! Former::file('slider')
                     ->label('Image')->accept('image')
                     ->help('File harus berekstensi .jpg, .jpeg, .png, .bmp dan tidak lebih dari 5 Mb.')
                     ->max(5, 'MB')->required() !!}
-                </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <a href="{{route('settings.slider.index')}}" class="btn btn-default">Batal</a>
-                </div>
-                {!! Former::close() !!}
-            </div>
-        </div>
-    </div>
-</section>
+    
+				</div>
+			</section>
+		{!! Former::close() !!}
+		
+		
+
+	</div>
+</div>
+<!-- end: page -->
 @endsection
