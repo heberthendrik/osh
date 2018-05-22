@@ -1,26 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="content-header">
-    <h1>Petugas</h1>
+<header class="page-header">
+	<h2>Petugas</h2>
 
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-gears"></i> Settings</a></li>
+	<div class="right-wrapper pull-right">
+		<ol class="breadcrumbs">
+			<li><a href="#"><i class="fa fa-gears"></i> Settings</a></li>
         <li><a href="{{route('settings.officer.index')}}">Petugas</a></li>
-        <li class="active">Tambah</li>
-    </ol>
-</section>
+			<li><span>Tambah</span></li>
+		</ol>
 
-<section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Input Data</h3>
-                </div>
-                {!! Former::open(route('settings.officer.store'))->method('post') !!}
-                <div class="box-body">
-                    {!! Former::text('nama')->required() !!}
+		<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
+	</div>
+</header>
+<!-- start: page -->
+<div class="row">
+	<div class="col-lg-12">
+		
+		{!! Former::open(route('settings.officer.store'))->method('post') !!}
+			<section class="panel">
+				<div class="panel-body">
+					
+					<div class="form-group">
+						<div class="col-md-12 text-right">
+							<a href="{{route('settings.officer.index')}}"><button type="button" class="btn btn-default">Batal</button></a>
+							<button type="submit" class="btn btn-primary">Simpan</button>
+						</div>
+					</div>
+	
+				</div>
+			</section>
+			
+			<section class="panel">
+				<header class="panel-heading">
+					<div class="panel-actions">
+						<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+						<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+					</div>
+	
+					<h2 class="panel-title">Input Data</h2>
+				</header>
+				<div class="panel-body">
+	
+					{!! Former::text('nama')->required() !!}
                     {!! Former::select('status')->options([
                     '1' => 'Aktif',
                     '0' => 'Tidak Aktif'
@@ -31,14 +54,14 @@
                     ->class('form-control select2')
                     ->options($filters['id_rs'])
                     ->required() !!}
-                </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <a href="{{route('settings.officer.index')}}" class="btn btn-default">Batal</a>
-                </div>
-                {!! Former::close() !!}
-            </div>
-        </div>
-    </div>
-</section>
+    
+				</div>
+			</section>
+		{!! Former::close() !!}
+		
+		
+
+	</div>
+</div>
+<!-- end: page -->
 @endsection
