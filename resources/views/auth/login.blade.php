@@ -1,42 +1,139 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{ asset('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('adminlte/bower_components/font-awesome/css/font-awesome.min.css') }}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('adminlte/bower_components/Ionicons/css/ionicons.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('adminlte/dist/css/AdminLTE.min.css') }}">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/iCheck/square/blue.css') }}">
+<!doctype html>
+<html class="fixed">
+	<head>
+		<title>{{ config('app.name', 'Laravel') }}</title>
+		<!-- Basic -->
+		<meta charset="UTF-8">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <style>
-        .login-page{
-            background-image: url("{{asset('img/3271.png')}}");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
-        .login-box-body{
-            background: rgba(255,255,255,0.5);
-        }
-    </style>
-</head>
+		<!-- Web Fonts  -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{ asset('hebert_admin/assets/vendor/bootstrap/css/bootstrap.css') }}" />
+
+		<link rel="stylesheet" href="{{ asset('hebert_admin/assets/vendor/font-awesome/css/font-awesome.css') }}" />
+		<link rel="stylesheet" href="{{ asset('hebert_admin/assets/vendor/magnific-popup/magnific-popup.css') }}" />
+		<link rel="stylesheet" href="{{ asset('hebert_admin/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css') }}" />
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="{{ asset('hebert_admin/assets/stylesheets/theme.css') }}" />
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="{{ asset('hebert_admin/assets/stylesheets/skins/default.css') }}" />
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="{{ asset('hebert_admin/assets/stylesheets/theme-custom.css') }}">
+
+		<!-- Head Libs -->
+		<script src="{{ asset('hebert_admin/assets/vendor/modernizr/modernizr.js') }}"></script>
+
+	</head>
+	<body>
+		<!-- start: page -->
+		<section class="body-sign">
+			<div class="center-sign">
+				<a href="/home" class="logo pull-left">
+					<img src="{{ asset('hebert_admin/images/logo_revised.png') }}" height="54" alt="Porto Admin" />
+				</a>
+
+				<div class="panel panel-sign">
+					<div class="panel-title-sign mt-xl text-right">
+						<h2 class="title text-uppercase text-weight-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" method="POST" action="{{ route('login') }}">
+							{{ csrf_field() }}
+							<div class="form-group mb-lg  has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
+								<label>Email</label>
+								<div class="input-group input-group-icon">
+									<input  type="email" name="email" type="text" class="form-control input-lg" value="{{ old('email') }}" required autofocus />
+									<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+					                @if ($errors->has('email'))
+					                <span class="help-block">
+					                    <strong>{{ $errors->first('email') }}</strong>
+					                </span>
+					                @endif
+									<span class="input-group-addon">
+										<span class="icon icon-lg">
+											<i class="fa fa-user"></i>
+										</span>
+									</span>
+								</div>
+							</div>
+
+							<div class="form-group mb-lg  has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
+								<div class="clearfix">
+									<label class="pull-left">Password</label>
+									<a href="pages-recover-password.html" class="pull-right">Lost Password?</a>
+								</div>
+								<div class="input-group input-group-icon">
+									<input  type="password" name="password" class="form-control input-lg" required />
+									<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+					                @if ($errors->has('password'))
+					                                    <span class="help-block">
+					                                        <strong>{{ $errors->first('password') }}</strong>
+					                                    </span>
+					                @endif
+									<span class="input-group-addon">
+										<span class="icon icon-lg">
+											<i class="fa fa-lock"></i>
+										</span>
+									</span>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-8">
+									<div class="checkbox-custom checkbox-default">
+										<input id="RememberMe" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}/>
+										<label for="RememberMe">Remember Me</label>
+									</div>
+								</div>
+								<div class="col-sm-4 text-right">
+									<button type="submit" class="btn btn-primary hidden-xs">Sign In</button>
+									<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign In</button>
+								</div>
+							</div>
+
+							
+
+						</form>
+					</div>
+				</div>
+
+				<p class="text-center text-muted mt-md mb-md">&copy; Copyright 2018. All Rights Reserved.</p>
+			</div>
+		</section>
+		<!-- end: page -->
+
+		<!-- Vendor -->
+		<script src="{{ asset('hebert_admin/assets/vendor/jquery/jquery.js') }}"></script>
+		<script src="{{ asset('hebert_admin/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js') }}"></script>
+		<script src="{{ asset('hebert_admin/assets/vendor/bootstrap/js/bootstrap.js') }}"></script>
+		<script src="{{ asset('hebert_admin/assets/vendor/nanoscroller/nanoscroller.js') }}"></script>
+		<script src="{{ asset('hebert_admin/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+		<script src="{{ asset('hebert_admin/assets/vendor/magnific-popup/jquery.magnific-popup.js') }}"></script>
+		<script src="{{ asset('hebert_admin/assets/vendor/jquery-placeholder/jquery-placeholder.js') }}"></script>
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="{{ asset('hebert_admin/assets/javascripts/theme.js') }}"></script>
+		
+		<!-- Theme Custom -->
+		<script src="{{ asset('hebert_admin/assets/javascripts/theme.custom.js') }}"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="{{ asset('hebert_admin/assets/javascripts/theme.init.js') }}"></script>
+
+	</body>
+</html>
+
+	
+	
+	
+	
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
