@@ -1,33 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!doctype html>
+<html class="fixed sidebar-light">
+	<head>
+		<title>{{ config('app.name', 'Laravel') }}</title>
+		<!-- Basic -->
+		<meta charset="UTF-8">
 
-    @include('partials._styles')
-</head>
-<body class="hold-transition skin-red sidebar-mini">
-<div class="wrapper">
-    @include('admin._navbar')
+		<title>Open Swelab</title>
 
-    @include('admin.sidebar')
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <div class="content-wrapper">
-        @yield('content')
-    </div>
-    <footer class="main-footer">
-        <div class="container">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 1.0
-            </div>
-            <strong>Copyright &copy; 2018 PT. Swelab Indonesia.</strong> All rights
-            reserved.
-        </div>
-    </footer>
-</div>
+		@include('partials._styles')
+	</head>
+	
+	<body>
 
-@include('partials._scripts')
-</body>
+		<section class="body">
+			@include('admin._navbar')
+	
+			<div class="inner-wrapper">
+			    @include('admin.sidebar')
+			    
+			    <section role="main" class="content-body">
+			        @yield('content')
+			    </section>
+		    </div>
+		</section>
+
+		@include('partials._scripts')
+	</body>
+	
 </html>
