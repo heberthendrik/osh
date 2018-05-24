@@ -38,7 +38,7 @@
 
 			<div class="center-sign">
 				
-				<div class="row">
+				<div class="row" style="margin-bottom:-30px;">
 					<div class="col-md-12 text-center">
 						<img src="{{ asset('hebert_admin/images/logo_swelab_square.png') }}" style="max-height:300px;width:auto;" />
 					</div>
