@@ -1,30 +1,62 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!doctype html>
+<html class="fixed sidebar-light">
+	<head>
+		<title>{{ config('app.name', 'Laravel') }}</title>
+		<!-- Basic -->
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    @include('partials._styles')
-</head>
-<body class="hold-transition skin-red layout-top-nav">
-<div class="wrapper">
-    @include('layouts._navbar')
-    <div class="content-wrapper">
-        @yield('content')
-    </div>
-    <footer class="main-footer">
-        <div class="container">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 1.0
-            </div>
-            <strong>Copyright &copy; 2018 PT. Swelab Indonesia.</strong> All rights
-            reserved.
-        </div>
-    </footer>
-</div>
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-@include('partials._scripts')
-</body>
+		@include('partials._styles')
+	</head>
+	
+	<body>
+	
+		<section class="body">
+			@include('layouts._navbar')
+	
+			<div class="inner-wrapper">
+			    
+			    <section role="main" class="content-body">
+			    
+			    	<style>
+						.required{
+							display:inherit;
+						}
+						label{
+							color:#777;
+							font-size:13px;
+						}
+						label sup{
+							color:red;
+							font-size:13px;
+							padding-left:5px;
+						}
+						select, .select2-selection__rendered, input{
+							font-size:13px!important;
+							font-weight:normal!important;
+						}
+						
+						.select2-selection{
+							height:35px!important;
+						}
+						
+						.content-body{
+							margin-left:0px!important;
+						}
+						
+						html.fixed .page-header{
+							left:0px;
+						}
+					</style>
+			    
+			        @yield('content')
+			    </section>
+		    </div>
+		</section>
+	
+		@include('partials._scripts')
+	</body>
 </html>
