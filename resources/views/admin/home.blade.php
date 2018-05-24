@@ -166,7 +166,7 @@
 
 <!-- start: page -->
 <div class="row">
-	<div class="col-md-6 col-lg-12 col-xl-6">
+	<div class="col-md-6 col-lg-6 col-xl-6">
 		<section class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions">
@@ -271,44 +271,39 @@
 			</div>
 		</section>
 	</div>
-	<div class="col-lg-6">
-		<div class="row">
-			<div class="col-md-12">
-				<section class="panel">
-					<header class="panel-heading">
-						<div class="panel-actions">
-							<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
-							<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
-						</div>
+	<div class="col-md-6 col-lg-6 col-xl-6">
+		<section class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions">
+					<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+				</div>
 
-						<h2 class="panel-title">Gender Statistic</h2>
-						<p class="panel-subtitle">Customer gender statistic</p>
-					</header>
-					<div class="panel-body">
-						<div class="row text-center">
-							<div class="col-md-6">
-								<div class="circular-bar">
-									<div class="circular-bar-chart" data-percent="85" data-plugin-options='{ "barColor": "#0088CC", "delay": 300 }'>
-										<strong>Male</strong>
-										<label><span class="percent">85</span>%</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="circular-bar">
-									<div class="circular-bar-chart" data-percent="15" data-plugin-options='{ "barColor": "#2BAAB1", "delay": 600 }'>
-										<strong>Female</strong>
-										<label><span class="percent">15</span>%</label>
-									</div>
-								</div>
+				<h2 class="panel-title">Gender Statistic</h2>
+				<p class="panel-subtitle">Customer gender statistic</p>
+			</header>
+			<div class="panel-body">
+				<div class="row text-center">
+					<div class="col-md-6">
+						<div class="circular-bar">
+							<div class="circular-bar-chart" data-percent="85" data-plugin-options='{ "barColor": "#0088CC", "delay": 300 }'>
+								<strong>Male</strong>
+								<label><span class="percent">85</span>%</label>
 							</div>
 						</div>
 					</div>
-				</section>
+					<div class="col-md-6">
+						<div class="circular-bar">
+							<div class="circular-bar-chart" data-percent="15" data-plugin-options='{ "barColor": "#2BAAB1", "delay": 600 }'>
+								<strong>Female</strong>
+								<label><span class="percent">15</span>%</label>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
+		</section>
 	</div>
-	
 </div>
 
 <div class="row">
@@ -415,7 +410,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-4">
 		<section class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions">
@@ -462,7 +457,7 @@
 			</div>
 		</section>
 	</div>
-	<div class="col-md-9">
+	<div class="col-md-8">
 		<section class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions">
