@@ -33,12 +33,17 @@
 	</head>
 	<body>
 		<!-- start: page -->
+		
 		<section class="body-sign">
-			<div class="center-sign">
-				<a href="/home" class="logo pull-left">
-					<img src="{{ asset('hebert_admin/images/logo_revised.png') }}" height="54" alt="Porto Admin" />
-				</a>
 
+			<div class="center-sign">
+				
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<img src="{{ asset('hebert_admin/images/logo_swelab_square.png') }}" style="max-height:300px;width:auto;" />
+					</div>
+				</div>
+				
 				<div class="panel panel-sign">
 					<div class="panel-title-sign mt-xl text-right">
 						<h2 class="title text-uppercase text-weight-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
