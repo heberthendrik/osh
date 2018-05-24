@@ -31,28 +31,9 @@
 						<div class="widget-summary">
 							<div class="widget-summary-col">
 								<div class="summary">
-									<h4 class="title">Daily Lab Generated</h4>
+									<h4 class="title">Today Lab Number</h4>
 									<div class="info">
 										<strong class="amount">1281</strong>
-									</div>
-								</div>
-								<div class="summary-footer">
-									<a class="text-muted text-uppercase">(view all)</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-			<div class="col-md-12 col-lg-3 col-xl-3">
-				<section class="panel panel-featured-left panel-featured-secondary">
-					<div class="panel-body">
-						<div class="widget-summary">
-							<div class="widget-summary-col">
-								<div class="summary">
-									<h4 class="title">Daily Pending Approval</h4>
-									<div class="info">
-										<strong class="amount">13</strong>
 									</div>
 								</div>
 								<div class="summary-footer">
@@ -69,9 +50,28 @@
 						<div class="widget-summary">
 							<div class="widget-summary-col">
 								<div class="summary">
-									<h4 class="title">Today's Report</h4>
+									<h4 class="title">Today Completed Report</h4>
 									<div class="info">
 										<strong class="amount">38</strong>
+									</div>
+								</div>
+								<div class="summary-footer">
+									<a class="text-muted text-uppercase">(view all)</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-12 col-lg-3 col-xl-3">
+				<section class="panel panel-featured-left panel-featured-secondary">
+					<div class="panel-body">
+						<div class="widget-summary">
+							<div class="widget-summary-col">
+								<div class="summary">
+									<h4 class="title">Today Pending Approval</h4>
+									<div class="info">
+										<strong class="amount">13</strong>
 									</div>
 								</div>
 								<div class="summary-footer">
@@ -88,7 +88,7 @@
 						<div class="widget-summary">
 							<div class="widget-summary-col">
 								<div class="summary">
-									<h4 class="title">Today's Patient</h4>
+									<h4 class="title">Number of Customer Today</h4>
 									<div class="info">
 										<strong class="amount">3765</strong>
 									</div>
@@ -105,16 +105,83 @@
 	</div>
 </div>
 
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions">
+					<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+				</div>
+
+				<h2 class="panel-title">Daily Lab Statistic</h2>
+				<p class="panel-subtitle">Total lab data generated from 00.00 - 23.00 today.</p>
+			</header>
+			<div class="panel-body">
+
+				<!-- Flot: Basic -->
+				<div class="chart chart-md" id="flotDashBasic"></div>
+				<script>
+
+					var flotDashBasicData = [{
+						data: [
+							[0, 170],
+							[1, 169],
+							[2, 173],
+							[3, 188],
+							[4, 147],
+							[5, 113],
+							[6, 128],
+							[7, 169],
+							[8, 173],
+							[9, 128],
+							[10, 128],
+							[11, 170],
+							[12, 169],
+							[13, 173],
+							[14, 188],
+							[15, 147],
+							[16, 113],
+							[17, 128],
+							[18, 169],
+							[19, 173],
+							[20, 128],
+							[21, 169],
+							[22, 188],
+							[23, 147]
+							
+						],
+						label: "Generated",
+						color: "#0088cc"
+					}];
+
+					
+
+				</script>
+
+			</div>
+		</section>
+	</div>
+</div>
+
 <!-- start: page -->
 <div class="row">
 	<div class="col-md-6 col-lg-12 col-xl-6">
 		<section class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions">
+					<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+				</div>
+
+				<h2 class="panel-title">Weekly Lab Statistic</h2>
+				<p class="panel-subtitle">Total lab occurance and lab report approval made within a week.</p>
+			</header>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-8">
 						<div class="chart-data-selector" id="salesSelectorWrapper">
 							<h2>
-								Weekly Lab Statistic:
 								<strong>
 									<select class="form-control" id="salesSelector">
 										<option value="LabTotal" selected>Generated</option>
@@ -245,7 +312,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-lg-12 col-md-12">
 		<section class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions">
@@ -253,66 +320,7 @@
 					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
 				</div>
 
-				<h2 class="panel-title">Daily Lab Statistic</h2>
-				<p class="panel-subtitle">Total lab data generated from 00.00 - 23.00 today.</p>
-			</header>
-			<div class="panel-body">
-
-				<!-- Flot: Basic -->
-				<div class="chart chart-md" id="flotDashBasic"></div>
-				<script>
-
-					var flotDashBasicData = [{
-						data: [
-							[0, 170],
-							[1, 169],
-							[2, 173],
-							[3, 188],
-							[4, 147],
-							[5, 113],
-							[6, 128],
-							[7, 169],
-							[8, 173],
-							[9, 128],
-							[10, 128],
-							[11, 170],
-							[12, 169],
-							[13, 173],
-							[14, 188],
-							[15, 147],
-							[16, 113],
-							[17, 128],
-							[18, 169],
-							[19, 173],
-							[20, 128],
-							[21, 169],
-							[22, 188],
-							[23, 147]
-							
-						],
-						label: "Generated",
-						color: "#0088cc"
-					}];
-
-					
-
-				</script>
-
-			</div>
-		</section>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-lg-12 col-md-12">
-		<section class="panel">
-			<header class="panel-heading panel-heading-transparent">
-				<div class="panel-actions">
-					<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
-					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
-				</div>
-
-				<h2 class="panel-title">Lab Report</h2>
+				<h2 class="panel-title">Latest Lab Data</h2>
 			</header>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -329,7 +337,7 @@
 							<tr>
 								<td>1</td>
 								<td>#123</td>
-								<td><span class="label label-success">Complete</span></td>
+								<td><span class="label label-success">Already Reviewed</span></td>
 								<td>
 									<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
 										<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -341,7 +349,7 @@
 							<tr>
 								<td>2</td>
 								<td>#234</td>
-								<td><span class="label label-success">Complete</span></td>
+								<td><span class="label label-success">Already Reviewed</span></td>
 								<td>
 									<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
 										<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -353,7 +361,7 @@
 							<tr>
 								<td>3</td>
 								<td>#345</td>
-								<td><span class="label label-warning">On Progress</span></td>
+								<td><span class="label label-warning">Need Doctor Approval</span></td>
 								<td>
 									<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
 										<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
@@ -365,7 +373,7 @@
 							<tr>
 								<td>4</td>
 								<td>#456</td>
-								<td><span class="label label-success">Complete</span></td>
+								<td><span class="label label-success">Already Reviewed</span></td>
 								<td>
 									<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
 										<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
@@ -377,7 +385,7 @@
 							<tr>
 								<td>5</td>
 								<td>#567</td>
-								<td><span class="label label-warning">On Progress</span></td>
+								<td><span class="label label-warning">Need Doctor Approval</span></td>
 								<td>
 									<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
 										<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
@@ -387,21 +395,9 @@
 								</td>
 							</tr>
 							<tr>
-								<td>6</td>
-								<td>#678</td>
-								<td><span class="label label-danger">Rejected</span></td>
-								<td>
-									<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-										<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-											40%
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
 								<td>7</td>
 								<td>#789</td>
-								<td><span class="label label-success">Complete</span></td>
+								<td><span class="label label-success">Already Reviewed</span></td>
 								<td>
 									<div class="progress progress-sm progress-half-rounded mt-xs light">
 										<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 95%;">
@@ -508,13 +504,13 @@
 <div class="row">
 	<div class="col-md-12">
 		<section class="panel">
-			<header class="panel-heading panel-heading-transparent">
+			<header class="panel-heading">
 				<div class="panel-actions">
 					<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
 					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
 				</div>
 
-				<h2 class="panel-title">Server Log</h2>
+				<h2 class="panel-title">System Log</h2>
 			</header>
 			<div class="panel-body">
 				<div id="access-log" class="tab-pane active">
