@@ -36,7 +36,7 @@
 					<div class="col-lg-8">
 						<div class="chart-data-selector" id="salesSelectorWrapper">
 							<h2>
-								Data Lab:
+								Weekly Lab Statistic:
 								<strong>
 									<select class="form-control" id="salesSelector">
 										<option value="LabTotal" selected>Generated</option>
@@ -64,7 +64,7 @@
 									    color: "#0088cc"
 									}];
 
-									// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.
+									
 
 								</script>
 
@@ -85,7 +85,7 @@
 									    color: "#2baab1"
 									}];
 
-									// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.
+									
 
 								</script>
 
@@ -106,7 +106,7 @@
 									    color: "#734ba9"
 									}];
 
-									// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.
+									
 
 								</script>
 							</div>
@@ -122,6 +122,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</section>
 	</div>
@@ -229,7 +230,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-12">
 		<section class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions">
@@ -237,8 +238,8 @@
 					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
 				</div>
 
-				<h2 class="panel-title">Grafik Pemeriksaan Bulanan</h2>
-				<p class="panel-subtitle">Customize the graphs as much as you want, there are so many options and features to display information using Porto Admin Template.</p>
+				<h2 class="panel-title">Daily Lab Statistic</h2>
+				<p class="panel-subtitle">Customize the graphs as much as you want, there are so many options and features to display information.</p>
 			</header>
 			<div class="panel-body">
 
@@ -258,65 +259,29 @@
 							[7, 169],
 							[8, 173],
 							[9, 128],
-							[10, 128]
+							[10, 128],
+							[11, 170],
+							[12, 169],
+							[13, 173],
+							[14, 188],
+							[15, 147],
+							[16, 113],
+							[17, 128],
+							[18, 169],
+							[19, 173],
+							[20, 128],
+							[21, 169],
+							[22, 188],
+							[23, 147]
+							
 						],
 						label: "Generated",
 						color: "#0088cc"
-					}, {
-						data: [
-							[0, 115],
-							[1, 124],
-							[2, 114],
-							[3, 121],
-							[4, 115],
-							[5, 83],
-							[6, 102],
-							[7, 148],
-							[8, 147],
-							[9, 103],
-							[10, 113]
-						],
-						label: "Approved",
-						color: "#2baab1"
-					}, {
-						data: [
-							[0, 70],
-							[1, 69],
-							[2, 73],
-							[3, 88],
-							[4, 47],
-							[5, 13],
-							[6, 28],
-							[7, 69],
-							[8, 73],
-							[9, 28],
-							[10, 28]
-						],
-						label: "Rejected",
-						color: "#734ba9"
 					}];
 
-					// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.
+					
 
 				</script>
-
-			</div>
-		</section>
-	</div>
-	<div class="col-md-6">
-		<section class="panel">
-			<header class="panel-heading">
-				<div class="panel-actions">
-					<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
-					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
-				</div>
-				<h2 class="panel-title">Server Usage</h2>
-				<p class="panel-subtitle">It's easy to create custom graphs on Porto Admin Template, there are several graph types that you can use, such as lines, bars, pie charts, etc...</p>
-			</header>
-			<div class="panel-body">
-
-				<!-- Flot: Curves -->
-				<div class="chart chart-md" id="flotDashRealTime"></div>
 
 			</div>
 		</section>
