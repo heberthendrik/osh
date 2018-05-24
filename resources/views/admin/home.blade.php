@@ -24,6 +24,11 @@
 
 <!-- start: page -->
 <div class="row">
+	<div class="col-md-12">
+		<h3 style="font-weight:bold;">DASHBOARD UNTUK ADMIN</h3>
+	</div>
+</div>
+<div class="row">
 	<div class="col-md-6 col-lg-12 col-xl-6">
 		<section class="panel">
 			<div class="panel-body">
@@ -31,18 +36,17 @@
 					<div class="col-lg-8">
 						<div class="chart-data-selector" id="salesSelectorWrapper">
 							<h2>
-								This Week Report:
+								Data Lab:
 								<strong>
 									<select class="form-control" id="salesSelector">
 										<option value="Porto Admin" selected>Generated</option>
 										<option value="Porto Drupal" >Approved</option>
-										<option value="Porto Wordpress" >Rejected</option>
 									</select>
 								</strong>
 							</h2>
 
 							<div id="salesSelectorItems" class="chart-data-selector-items mt-sm">
-								<!-- Flot: Sales Porto Admin -->
+								
 								<div class="chart chart-sm" data-sales-rel="Porto Admin" id="flotDashSales1" class="chart-active"></div>
 								<script>
 
@@ -59,11 +63,9 @@
 									    color: "#0088cc"
 									}];
 
-									// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.
-
 								</script>
 
-								<!-- Flot: Sales Porto Drupal -->
+								
 								<div class="chart chart-sm" data-sales-rel="Porto Drupal" id="flotDashSales2" class="chart-hidden"></div>
 								<script>
 
@@ -80,28 +82,7 @@
 									    color: "#2baab1"
 									}];
 
-									// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.
-
 								</script>
-
-								<!-- Flot: Sales Porto Wordpress -->
-								<div class="chart chart-sm" data-sales-rel="Porto Wordpress" id="flotDashSales3" class="chart-hidden"></div>
-								<script>
-
-									var flotDashSales3Data = [{
-									    data: [
-									        ["Mon", 840],
-									        ["Tue", 740],
-									        ["Wed", 690],
-									        ["Thu", 940],
-									        ["Fri", 1180],
-									        ["Sat", 820],
-									        ["Sun", 570]
-									    ],
-									    color: "#734ba9"
-									}];
-
-									// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.
 
 								</script>
 							</div>
