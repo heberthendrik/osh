@@ -28,5 +28,11 @@
 
 		<!-- Head Libs -->
 		<script src="{{ asset('hebert_admin/assets/vendor/modernizr/modernizr.js') }}"></script>
+		
+		<style>
+			.dropdown-menu .active .radio{
+				color:#fff!important;
+			}
+		</style>
 
 @yield('styles')
