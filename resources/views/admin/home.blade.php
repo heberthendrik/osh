@@ -22,12 +22,91 @@
 	
 </header>
 
-<!-- start: page -->
 <div class="row">
-	<div class="col-md-12">
-		<h3 style="font-weight:bold;">DASHBOARD UNTUK ADMIN</h3>
+	<div class="col-md-12 col-lg-12 col-xl-12">
+		<div class="row">
+			<div class="col-md-12 col-lg-3 col-xl-3">
+				<section class="panel panel-featured-left panel-featured-primary">
+					<div class="panel-body">
+						<div class="widget-summary">
+							<div class="widget-summary-col">
+								<div class="summary">
+									<h4 class="title">Daily Lab Generated</h4>
+									<div class="info">
+										<strong class="amount">1281</strong>
+										<span class="text-primary">(14 pending approval)</span>
+									</div>
+								</div>
+								<div class="summary-footer">
+									<a class="text-muted text-uppercase">(view all)</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-12 col-lg-3 col-xl-3">
+				<section class="panel panel-featured-left panel-featured-secondary">
+					<div class="panel-body">
+						<div class="widget-summary">
+							<div class="widget-summary-col">
+								<div class="summary">
+									<h4 class="title">Daily Pending Approval</h4>
+									<div class="info">
+										<strong class="amount">13</strong>
+									</div>
+								</div>
+								<div class="summary-footer">
+									<a class="text-muted text-uppercase">(view all)</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-12 col-lg-3 col-xl-3">
+				<section class="panel panel-featured-left panel-featured-tertiary">
+					<div class="panel-body">
+						<div class="widget-summary">
+							<div class="widget-summary-col">
+								<div class="summary">
+									<h4 class="title">Today's Report</h4>
+									<div class="info">
+										<strong class="amount">38</strong>
+									</div>
+								</div>
+								<div class="summary-footer">
+									<a class="text-muted text-uppercase">(view all)</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-12 col-lg-3 col-xl-3">
+				<section class="panel panel-featured-left panel-featured-quaternary">
+					<div class="panel-body">
+						<div class="widget-summary">
+							<div class="widget-summary-col">
+								<div class="summary">
+									<h4 class="title">Today's Patient</h4>
+									<div class="info">
+										<strong class="amount">3765</strong>
+									</div>
+								</div>
+								<div class="summary-footer">
+									<a class="text-muted text-uppercase">(view all)</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
 	</div>
 </div>
+
+<!-- start: page -->
 <div class="row">
 	<div class="col-md-6 col-lg-12 col-xl-6">
 		<section class="panel">
@@ -126,99 +205,35 @@
 			</div>
 		</section>
 	</div>
-	<div class="col-md-6 col-lg-12 col-xl-6">
+	<div class="col-lg-6">
 		<div class="row">
-			<div class="col-md-12 col-lg-6 col-xl-6">
-				<section class="panel panel-featured-left panel-featured-primary">
-					<div class="panel-body">
-						<div class="widget-summary">
-							<div class="widget-summary-col widget-summary-col-icon">
-								<div class="summary-icon bg-primary">
-									<i class="fa fa-life-ring"></i>
-								</div>
-							</div>
-							<div class="widget-summary-col">
-								<div class="summary">
-									<h4 class="title">Report Generated</h4>
-									<div class="info">
-										<strong class="amount">1281</strong>
-										<span class="text-primary">(14 unread)</span>
-									</div>
-								</div>
-								<div class="summary-footer">
-									<a class="text-muted text-uppercase">(view all)</a>
-								</div>
-							</div>
+			<div class="col-md-12">
+				<section class="panel">
+					<header class="panel-heading">
+						<div class="panel-actions">
+							<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+							<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
 						</div>
-					</div>
-				</section>
-			</div>
-			<div class="col-md-12 col-lg-6 col-xl-6">
-				<section class="panel panel-featured-left panel-featured-secondary">
+
+						<h2 class="panel-title">Gender Statistic</h2>
+						<p class="panel-subtitle">Customer gender statistic</p>
+					</header>
 					<div class="panel-body">
-						<div class="widget-summary">
-							<div class="widget-summary-col widget-summary-col-icon">
-								<div class="summary-icon bg-secondary">
-									<i class="fa fa-usd"></i>
-								</div>
-							</div>
-							<div class="widget-summary-col">
-								<div class="summary">
-									<h4 class="title">Total Transaction</h4>
-									<div class="info">
-										<strong class="amount">14.890.000</strong>
+						<div class="row text-center">
+							<div class="col-md-6">
+								<div class="circular-bar">
+									<div class="circular-bar-chart" data-percent="85" data-plugin-options='{ "barColor": "#0088CC", "delay": 300 }'>
+										<strong>Male</strong>
+										<label><span class="percent">85</span>%</label>
 									</div>
 								</div>
-								<div class="summary-footer">
-									<a class="text-muted text-uppercase">(view all)</a>
-								</div>
 							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-			<div class="col-md-12 col-lg-6 col-xl-6">
-				<section class="panel panel-featured-left panel-featured-tertiary">
-					<div class="panel-body">
-						<div class="widget-summary">
-							<div class="widget-summary-col widget-summary-col-icon">
-								<div class="summary-icon bg-tertiary">
-									<i class="fa fa-file"></i>
-								</div>
-							</div>
-							<div class="widget-summary-col">
-								<div class="summary">
-									<h4 class="title">Today's Report</h4>
-									<div class="info">
-										<strong class="amount">38</strong>
+							<div class="col-md-6">
+								<div class="circular-bar">
+									<div class="circular-bar-chart" data-percent="15" data-plugin-options='{ "barColor": "#2BAAB1", "delay": 600 }'>
+										<strong>Female</strong>
+										<label><span class="percent">15</span>%</label>
 									</div>
-								</div>
-								<div class="summary-footer">
-									<a class="text-muted text-uppercase">(view all)</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-			<div class="col-md-12 col-lg-6 col-xl-6">
-				<section class="panel panel-featured-left panel-featured-quaternary">
-					<div class="panel-body">
-						<div class="widget-summary">
-							<div class="widget-summary-col widget-summary-col-icon">
-								<div class="summary-icon bg-quaternary">
-									<i class="fa fa-user"></i>
-								</div>
-							</div>
-							<div class="widget-summary-col">
-								<div class="summary">
-									<h4 class="title">Today's Patient</h4>
-									<div class="info">
-										<strong class="amount">3765</strong>
-									</div>
-								</div>
-								<div class="summary-footer">
-									<a class="text-muted text-uppercase">(view all)</a>
 								</div>
 							</div>
 						</div>
@@ -227,6 +242,7 @@
 			</div>
 		</div>
 	</div>
+	
 </div>
 
 <div class="row">
@@ -239,7 +255,7 @@
 				</div>
 
 				<h2 class="panel-title">Daily Lab Statistic</h2>
-				<p class="panel-subtitle">Customize the graphs as much as you want, there are so many options and features to display information.</p>
+				<p class="panel-subtitle">Total lab data generated from 00.00 - 23.00 today.</p>
 			</header>
 			<div class="panel-body">
 
@@ -297,7 +313,7 @@
 					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
 				</div>
 
-				<h2 class="panel-title">Status Report</h2>
+				<h2 class="panel-title">Lab Report</h2>
 			</header>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -393,6 +409,183 @@
 											95%
 										</div>
 									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-3">
+		<section class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions">
+					<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+				</div>
+
+				<h2 class="panel-title">Age Statistic</h2>
+				<p class="panel-subtitle">Customer age comparison statistic</p>
+			</header>
+			<div class="panel-body">
+
+				<div class="chart chart-md" id="flotPie"></div>
+				<script type="text/javascript">
+
+					var flotPieData = [{
+						label: "<20",
+						data: [
+							[1, 60]
+						],
+						color: '#0088cc'
+					}, {
+						label: "20-30",
+						data: [
+							[1, 10]
+						],
+						color: '#2baab1'
+					}, {
+						label: "30-40",
+						data: [
+							[1, 15]
+						],
+						color: '#734ba9'
+					}, {
+						label: ">40",
+						data: [
+							[1, 15]
+						],
+						color: '#E36159'
+					}];
+
+				</script>
+
+			</div>
+		</section>
+	</div>
+	<div class="col-md-9">
+		<section class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions">
+					<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+				</div>
+
+				<h2 class="panel-title">Doctor's KPI</h2>
+				<p class="panel-subtitle">Key performance indicator for doctor approval this year</p>
+			</header>
+			<div class="panel-body">
+
+				<div class="chart chart-md" id="flotBars"></div>
+				<script type="text/javascript">
+
+					var flotBarsData = [
+						["Jan", 28],
+						["Feb", 42],
+						["Mar", 25],
+						["Apr", 23],
+						["May", 37],
+						["Jun", 33],
+						["Jul", 18],
+						["Aug", 14],
+						["Sep", 18],
+						["Oct", 15],
+						["Nov", 4],
+						["Dec", 7]
+					];
+
+				</script>
+
+			</div>
+		</section>
+	</div>
+	
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading panel-heading-transparent">
+				<div class="panel-actions">
+					<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+					<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+				</div>
+
+				<h2 class="panel-title">Server Log</h2>
+			</header>
+			<div class="panel-body">
+				<div id="access-log" class="tab-pane active">
+					<table class="table table-striped table-no-more table-bordered  mb-none">
+						<thead>
+							<tr>
+								<th style="width: 10%"><span class="text-weight-normal text-sm">Type</span></th>
+								<th style="width: 15%"><span class="text-weight-normal text-sm">Date</span></th>
+								<th><span class="text-weight-normal text-sm">Message</span></th>
+							</tr>
+						</thead>
+						<tbody class="log-viewer">
+							<tr>
+								<td data-title="Type" class="pt-md pb-md">
+									<i class="fa fa-bug fa-fw text-muted text-md va-middle"></i>
+									<span class="va-middle">Debug</span>
+								</td>
+								<td data-title="Date" class="pt-md pb-md">
+									13/04/2016 18:25:59
+								</td>
+								<td data-title="Message" class="pt-md pb-md">
+									my.host - oh snap! another exception
+								</td>
+							</tr>
+							<tr>
+								<td data-title="Type" class="pt-md pb-md">
+									<i class="fa fa-info fa-fw text-info text-md va-middle"></i>
+									<span class="va-middle">Info</span>
+								</td>
+								<td data-title="Date" class="pt-md pb-md">
+									13/04/2016 21:50:17
+								</td>
+								<td data-title="Message" class="pt-md pb-md">
+									"GET / HTTP/1.1" 200 1225
+								</td>
+							</tr>
+							<tr>
+								<td data-title="Type" class="pt-md pb-md">
+									<i class="fa fa-warning fa-fw text-warning text-md va-middle"></i>
+									<span class="va-middle">Warning</span>
+								</td>
+								<td data-title="Date" class="pt-md pb-md">
+									13/04/2016 17:44:21
+								</td>
+								<td data-title="Message" class="pt-md pb-md">
+									DocumentRoot [/var/www/hebert_admin/] does not exist
+								</td>
+							</tr>
+							<tr>
+								<td data-title="Type" class="pt-md pb-md">
+									<i class="fa fa-times-circle fa-fw text-danger text-md va-middle"></i>
+									<span class="va-middle">Error</span>
+								</td>
+								<td data-title="Date" class="pt-md pb-md">
+									13/04/2016 21:55:18
+								</td>
+								<td data-title="Message" class="pt-md pb-md">
+									File does not exist: /var/www/hebert_admin/favicon.ico
+								</td>
+							</tr>
+							<tr>
+								<td data-title="Type" class="pt-md pb-md">
+									<i class="fa fa-ban fa-fw text-danger text-md va-middle"></i>
+									<span class="va-middle">Fatal</span>
+								</td>
+								<td data-title="Date" class="pt-md pb-md">
+									13/04/2016 22:13:39
+								</td>
+								<td data-title="Message" class="pt-md pb-md">
+									not a tree object
 								</td>
 							</tr>
 						</tbody>
