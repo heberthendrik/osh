@@ -47,7 +47,7 @@
 							</h2>
 
 							<div id="salesSelectorItems" class="chart-data-selector-items mt-sm">
-								<!-- Flot: Sales Porto Admin -->
+								
 								<div class="chart chart-sm" data-sales-rel="LabTotal" id="flotDashSales1" class="chart-active"></div>
 								<script>
 
@@ -68,7 +68,7 @@
 
 								</script>
 
-								<!-- Flot: Sales Porto Drupal -->
+								
 								<div class="chart chart-sm" data-sales-rel="LabApproved" id="flotDashSales2" class="chart-hidden"></div>
 								<script>
 
@@ -89,7 +89,7 @@
 
 								</script>
 
-								<!-- Flot: Sales Porto Wordpress -->
+								
 								<div class="chart chart-sm" data-sales-rel="LabPending" id="flotDashSales3" class="chart-hidden"></div>
 								<script>
 
