@@ -2,7 +2,7 @@
 			<header class="header">
 				<div class="logo-container">
 					<a href="../" class="logo">
-						<img src="{{ asset('hebert_admin/images/logo_revised.png') }}" height="35" alt="Logo Open Swelab" />
+						<img src="{{ asset('hebert_admin/images/logo_swelab_horizontal2.jpg') }}" style="max-height:40px;height:100%;width:auto;" alt="Logo Open Swelab" />
 					</a>
 					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
 						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
