@@ -34,7 +34,6 @@
 									<h4 class="title">Daily Lab Generated</h4>
 									<div class="info">
 										<strong class="amount">1281</strong>
-										<span class="text-primary">(14 pending approval)</span>
 									</div>
 								</div>
 								<div class="summary-footer">
