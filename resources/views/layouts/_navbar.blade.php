@@ -73,7 +73,7 @@
 							</figure>
 							<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
 								<span class="name">{{ Auth::user()->name }}</span>
-								<span class="role">{{ $user->roles }}</span>
+								<span class="role">{{ Auth::user()->roles }}</span>
 							</div>
 			
 							<i class="fa custom-caret"></i>
