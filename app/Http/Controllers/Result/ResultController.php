@@ -169,6 +169,12 @@ class ResultController extends Controller
 
     public function getPrint($id)
     {
+    
+    	exec('/usr/local/bin/wkhtmltoimage --width 1400 --crop-h 800 --quality 100 http://localhost/development_site/osh/custom-report-generator/ /Users/heberthendrikpelapelapon/Downloads/bbbb.png');
+
+		exec('open /Users/heberthendrikpelapelapon/Downloads/bbbb.png');
+    	
+    
         $result = Result::with(['details' => function($query)
         {
             $query->orderBy('kd_acc')
