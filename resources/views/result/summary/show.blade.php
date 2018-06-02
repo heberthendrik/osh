@@ -19,7 +19,7 @@
 	<div class="col-md-12">
 		<section class="panel">
 			<header class="panel-heading">
-				<div class="row">					
+				<div class="row">
 					<h2 class="panel-title" style="padding-left:15px;">{{$result->no_lab}} - {{$result->nama}}</h2>
 					<div class="pull-right" style="padding-right:20px;float:right;position:absolute;right:0;top:0;margin-top:15px;">
 						{!! DNS1D::getBarcodeHTML($result->no_lab, "C128", '1','30')!!}
@@ -28,7 +28,7 @@
 			</header>
 			<div class="panel-body">
 				<div class="box-body">
-                    
+
                     @if($result->count())
 					<div class="row">
 					    <div class="col-md-9">
@@ -90,12 +90,12 @@
 					                <td>{{$result->nm_pemeriksa}}</td>
 					            </tr>
 					        </table>
-					
+
 					        @if(Auth::user()->roles == 'officer')
 					        <a href="javascript:;" data-toggle="modal" data-target="#input_detail" class="btn btn-sm btn-primary"> Input Hasil Lab Manual</a>
 					        <br/><br/>
 					        @endif
-					
+
 					        <table class="table table-bordered table-responsive">
 					            <thead>
 					            <tr>
@@ -116,7 +116,7 @@
 					            @php
 					            $i = 0;
 					            @endphp
-					
+
 					            @foreach ($result->details as $rd)
 					            @if($i == 0 || $i % 2 == 0)
 					            @if ($i % 2 == 0)
@@ -170,24 +170,16 @@
 					        </table>
 					    </div>
 					    <div class="col-md-3">
-					        @if($result->histogram)
+                            @php
+                            $plt_value = isset($result->histogram->plt_value)?$result->histogram->plt_value:0;
+                            $rbc_value = isset($result->histogram->rbc_value)?$result->histogram->rbc_value:0;
+                            $wbc_value = isset($result->histogram->wbc_value)?$result->histogram->wbc_value:0;
+                            @endphp
+                            @if($result->histogram)
 					            <canvas id="plt-chart" height="200"></canvas>
 					            <canvas id="rbc-chart" height="200"></canvas>
 					            <canvas id="wbc-chart" height="200"></canvas>
-					        @php
-					        $img = $result->histogram->image;
-					        $decode = base64_decode($img);
-					        $ar = (array)json_decode($decode);
-					        $plt_value = json_encode($ar['PLT']->values->PLT);
-					        $rbc_value = json_encode($ar['RBC']->values->RBC);
-					        $wbc_value = json_encode($ar['WBC']->values->WBC);
-					        @endphp
 					        @else
-					        @php
-					        $plt_value = 0;
-					        $rbc_value = 0;
-					        $wbc_value = 0;
-					        @endphp
 					        <i class="fa fa-fw fa-info-circle text-primary"></i> Data Histogram Tidak Ditemukan
 					        @endif
 					    </div>
@@ -195,8 +187,8 @@
 					@else
 					<i class="fa fa-fw fa-info-circle text-primary"></i> Data Tidak Ditemukan
 					@endif
-					
-					
+
+
 					{{-- MODALS DETAIL --}}
 					<div class="modal fade" id="input_detail" role="dialog">
 					    <div class="modal-dialog modal-lg" role="document">
@@ -234,10 +226,6 @@
 					        </div>
 					    </div>
 					</div>
-					
-					
-
-                    
                 </div>
 			</div>
 		</section>
@@ -245,15 +233,6 @@
 </div>
 
 @endsection
-
-
-
-
-
-
-
-
-
 
 @section('styles')
 <link rel="stylesheet" href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}">

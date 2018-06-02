@@ -14,7 +14,7 @@
 		<div class="nano-content">
 			<nav id="menu" class="nav-main" role="navigation">
 				<ul class="nav nav-main">
-					<li class="nav-active">
+                    <li class="{{Request::is('settings/dashboard*')?'nav-active':''}}">
 						<a href="{{route('settings.dashboard.index')}}">
 							<i class="fa fa-home" aria-hidden="true"></i>
 							<span>Dashboard</span>

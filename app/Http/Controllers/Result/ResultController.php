@@ -41,7 +41,7 @@ class ResultController extends Controller
     public function store(Request $request)
     {
         $data = $request->except(['_token']);
-        $user = $request->only(['nama','alamat','no_rm','sex','tgl_lahir','id_rs']);
+        $user = $request->only(['nama', 'alamat', 'no_rm', 'sex', 'tgl_lahir', 'id_rs']);
 
         $today = Carbon::today();
         $lastResult = Result::distinct()->where('no_lab', 'LIKE', $today->format('ymd') . '%')->max('id');
@@ -117,6 +117,23 @@ class ResultController extends Controller
             $query->orderBy('kd_acc')
                 ->orderBy('id_lab');
         }], 'histogram')->find($id);
+
+        if ($result->histogram) {
+            if (!$result->histogram->plt_value) {
+
+                $img = $result->histogram->image;
+                $decode = base64_decode($img);
+                $ar = (array)json_decode($decode);
+                $data['plt_value'] = json_encode($ar['PLT']->values->PLT);
+                $data['rbc_value'] = json_encode($ar['RBC']->values->RBC);
+                $data['wbc_value'] = json_encode($ar['WBC']->values->WBC);
+
+                if ($result->histogram->update($data)) {
+                    notify()->flash("Update Histogram Berhasil", 'success', ['title' => "Success"]);
+                }
+            }
+        }
+
         return view('result.summary.show', compact('result'));
     }
 
@@ -170,10 +187,9 @@ class ResultController extends Controller
     public function getPrint($id)
     {
     
-    	exec('/usr/local/bin/wkhtmltoimage --width 1400 --crop-h 800 --quality 100 http://localhost/development_site/osh/custom-report-generator/ /Users/heberthendrikpelapelapon/Downloads/bbbb.png');
+    	exec('/usr/local/bin/wkhtmltoimage --width 1400 --crop-h 800 --quality 100 http://localhost/development_site/osh/custom-report-generator/?lid=1803120001 /Users/heberthendrikpelapelapon/Downloads/bbbb.png');
 
 		exec('open /Users/heberthendrikpelapelapon/Downloads/bbbb.png');
-    	
     
         $result = Result::with(['details' => function($query)
         {

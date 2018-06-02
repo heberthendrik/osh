@@ -1,5 +1,63 @@
 <?php
 $site_url = 'http://localhost/development_site/osh';
+
+//$_GET['lid'] = '1803120001';
+
+$host = "localhost";
+$port = "5432";
+$dbname = "ehealth";
+$user = "postgres";
+$password = "password";
+$pg_options = "--client_encoding=UTF8";
+
+$connection_string = "host={$host} port={$port} dbname={$dbname} user={$user} password={$password} options='{$pg_options}'";
+$dbconn = pg_connect($connection_string);
+
+
+/* AMBIL DATA PASIEN */
+$result = pg_query($dbconn, "SELECT * FROM tab_lab_master where id = '".$_GET['lid']."' ");
+if (!$result) {
+    echo "An error occurred.\n";
+    exit;
+}
+
+$drr = pg_fetch_all($result);
+$x_tanggal = $drr[0]['created_at'];
+$x_nolab = $drr[0]['id'];
+$x_norm = $drr[0]['no_rm'];
+$x_nama = $drr[0]['nama'];
+$x_tanggallahir = $drr[0]['tgl_lahir'];
+$x_umur = $drr[0]['umur'];
+$x_alamat = $drr[0]['alamat'];
+$x_ruang = $drr[0]['nm_ruang'];
+$x_kelas = $drr[0]['nm_kelas'];
+$x_status = $drr[0]['nm_status'];
+$x_dokterpengirim = $drr[0]['nm_dokter'];
+$x_alamatdokter = $drr[0]['alamat_dokter'];
+$x_ketklinik = $drr[0]['ket_klinik'];
+$x_catatan1 = $drr[0]['catatan_1'];
+$x_catatan2 = $drr[0]['catatan_2'];
+$x_dokteracc = $drr[0]['nm_dokter_acc'];
+$x_pemeriksa = $drr[0]['nm_pemeriksa'];
+
+/* table */
+
+
+/* AMBIL DATA HISTOGRAM */
+$result = pg_query($dbconn, "SELECT * FROM tab_lab_histogram where id = '".$_GET['lid']."' ");
+if (!$result) {
+    echo "An error occurred.\n";
+    exit;
+}
+
+$arr = pg_fetch_all($result);
+$x_id = $arr[0]['id'];
+$x_idmaster = $arr[0]['id_master'];
+$x_pltvalue = $arr[0]['plt_value'];
+$x_rbcvalue = $arr[0]['rbc_value'];
+$x_wbcvalue = $arr[0]['wbc_value'];
+
+
 ?>
 <!doctype html>
 <html class="fixed sidebar-light">
@@ -7,11 +65,6 @@ $site_url = 'http://localhost/development_site/osh';
 
 		<!-- Basic -->
 		<meta charset="UTF-8">
-
-		<title>Light Sidebar Layout | Porto Admin - Responsive HTML5 Template 1.5.5</title>
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -55,7 +108,7 @@ $site_url = 'http://localhost/development_site/osh';
 				<section class="panel">
 					<header class="panel-heading">
 						<div class="row">					
-							<h2 class="panel-title" style="padding-left:15px;">1803115001 - Zulkifli</h2>
+							<h2 class="panel-title" style="padding-left:15px;"><?php echo $x_id;?> - Zulkifli</h2>
 							<div class="pull-right" style="padding-right:20px;float:right;position:absolute;right:0;top:0;margin-top:15px;">
 <!-- 								{!! DNS1D::getBarcodeHTML($result->no_lab, "C128", '1','30')!!} -->
 							</div>
@@ -66,58 +119,57 @@ $site_url = 'http://localhost/development_site/osh';
 		                    
 		                    
 							<div class="row">
-							    <div class="col-md-9">
+							    <div class="col-md-8">
 							        <table class="table table-striped table-responsive">
 							            <tr>
 							                <th>Tanggal</th>
-							                <td>12 March 2018</td>
+							                <td><?php echo $x_tanggal;?></td>
 							                <th>No. Lab</th>
-							                <td>1803115001</td>
+							                <td><?php echo $x_id;?></td>
 							                <th>Status</th>
-							                <td>Pribadi</td>
+							                <td><?php echo $x_status;?></td>
 							            </tr>
 							            <tr>
 							                <th>No. Rekam Medis</th>
-							                <td colspan="3">727066012</td>
+							                <td colspan="3"><?php echo $x_norm;?></td>
 							                <th>Dokter Pengirim</th>
-							                <td>dr. Nazwan Hassa, Sp. S
-</td>
+							                <td><?php echo $x_dokterpengirim;?></td>
 							            </tr>
 							            <tr>
 							                <th>Nama</th>
-							                <td colspan="3">Zulkifli</td>
+							                <td colspan="3"><?php echo $x_nama;?></td>
 							                <th>Alamat Dokter</th>
-							                <td></td>
+							                <td><?php echo $x_alamatdokter;?></td>
 							            </tr>
 							            <tr>
 							                <th>Tanggal Lahir</th>
-							                <td colspan="3">03 November 1991</td>
+							                <td colspan="3"><?php echo $x_tanggallahir;?></td>
 							                <th>Ket Klinik</th>
-							                <td></td>
+							                <td><?php echo $x_ketklinik;?></td>
 							            </tr>
 							            <tr>
 							                <th>Umur</th>
-							                <td colspan="3">26</td>
+							                <td colspan="3"><?php echo $x_umur;?></td>
 							                <th>Catatan 1</th>
-							                <td></td>
+							                <td><?php echo $x_catatan1;?></td>
 							            </tr>
 							            <tr>
 							                <th>Alamat</th>
-							                <td colspan="3">Jl. Sutera Feronia Park Utama No. 25 Tangerang Selatan	</td>
+							                <td colspan="3"><?php echo $x_alamat;?></td>
 							                <th>Catatan 2</th>
-							                <td></td>
+							                <td><?php echo $x_catatan2;?></td>
 							            </tr>
 							            <tr>
 							                <th>Ruang</th>
-							                <td colspan="3">MARWAH</td>
+							                <td colspan="3"><?php echo $x_ruang;?></td>
 							                <th>Dokter ACC</th>
-							                <td></td>
+							                <td><?php echo $x_dokteracc;?></td>
 							            </tr>
 							            <tr>
 							                <th>Kelas</th>
-							                <td colspan="3"></td>
+							                <td colspan="3"><?php echo $x_kelas;?></td>
 							                <th>Pemeriksa</th>
-							                <td></td>
+							                <td><?php echo $x_pemeriksa;?></td>
 							            </tr>
 							        </table>
 							
@@ -286,174 +338,97 @@ $site_url = 'http://localhost/development_site/osh';
 							            
 							        </table>
 							    </div>
-							    <div class="col-md-3">
+							    <div class="col-md-4">
 							        
-							            <canvas id="plt-chart" height="150"></canvas>
+							        	<?php
+										$x_pltvalue = $arr[0]['plt_value'];
+										$x_rbcvalue = $arr[0]['rbc_value'];
+										$x_wbcvalue = $arr[0]['wbc_value'];
+										
+										$sanitize_x_pltvalue = str_replace('[', '', $x_pltvalue);
+										$sanitize_x_pltvalue2 = str_replace(']', '', $sanitize_x_pltvalue);
+										$array_x_pltvalue = explode(',', $sanitize_x_pltvalue2);
+							        	?>
+							        	<div style="margin-bottom:10px;"><span style="background:rgba(0, 255, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>PLT</div>
+							            <canvas id="plt-chart" height="170" width="400"></canvas>
 							            <script>
 											var c = document.getElementById("plt-chart");
 											var ctx = c.getContext("2d");
 											ctx.beginPath();
 											ctx.moveTo(0, 0);
 											ctx.lineTo(0, 150);
-											ctx.lineTo(300, 150);
+											ctx.lineTo(480, 150);
 											ctx.stroke();
 											
 											/* HORIZONTAL RULER */
 											ctx.moveTo(0,50);
-											ctx.lineTo(300,50);
+											ctx.lineTo(480,50);
 											ctx.moveTo(0,100);
-											ctx.lineTo(300,100);
+											ctx.lineTo(480,100);
 											ctx.moveTo(0,150);
-											ctx.lineTo(300,150);
+											ctx.lineTo(480,150);
 											ctx.strokeStyle="#d6d4d4";
 											ctx.stroke();
 											
 											/* VERTICAL RULER */
-											ctx.moveTo(10, 0);
-											ctx.lineTo(10, 150);
-											ctx.moveTo(20,0);
-											ctx.lineTo(20,150);
-											ctx.moveTo(30,0);
-											ctx.lineTo(30,150);
-											ctx.moveTo(40,0);
-											ctx.lineTo(40,150);
-											ctx.moveTo(50,0);
-											ctx.lineTo(50,150);
-											ctx.moveTo(60,0);
-											ctx.lineTo(60,150);
-											ctx.moveTo(70,0);
-											ctx.lineTo(70,150);
-											ctx.moveTo(80,0);
-											ctx.lineTo(80,150);
-											ctx.moveTo(90,0);
-											ctx.lineTo(90,150);
-											ctx.moveTo(100,0);
-											ctx.lineTo(100,150);
-											ctx.moveTo(110, 0);
-											ctx.lineTo(110, 150);
-											ctx.moveTo(120,0);
-											ctx.lineTo(120,150);
-											ctx.moveTo(130,0);
-											ctx.lineTo(130,150);
-											ctx.moveTo(140,0);
-											ctx.lineTo(140,150);
-											ctx.moveTo(150,0);
-											ctx.lineTo(150,150);
-											ctx.moveTo(160,0);
-											ctx.lineTo(160,150);
-											ctx.moveTo(170,0);
-											ctx.lineTo(170,150);
-											ctx.moveTo(180,0);
-											ctx.lineTo(180,150);
-											ctx.moveTo(190,0);
-											ctx.lineTo(190,150);
-											ctx.moveTo(200,0);
-											ctx.lineTo(200,150);
-											ctx.moveTo(210, 0);
-											ctx.lineTo(210, 150);
-											ctx.moveTo(220,0);
-											ctx.lineTo(220,150);
-											ctx.moveTo(230,0);
-											ctx.lineTo(230,150);
-											ctx.moveTo(240,0);
-											ctx.lineTo(240,150);
-											ctx.moveTo(250,0);
-											ctx.lineTo(250,150);
-											ctx.moveTo(260,0);
-											ctx.lineTo(260,150);
-											ctx.moveTo(270,0);
-											ctx.lineTo(270,150);
-											ctx.moveTo(280,0);
-											ctx.lineTo(280,150);
-											ctx.moveTo(290,0);
-											ctx.lineTo(290,150);
-											ctx.moveTo(300,0);
-											ctx.lineTo(300,150);
+											<?php
+											for( $i=0;$i<48;$i++ ){
+												?>
+												ctx.moveTo( <?php echo (($i+1)*10);?> , 0);
+												ctx.lineTo( <?php echo (($i+1)*10);?> , 150);
+												<?php
+											}
+											?>
 											ctx.strokeStyle="#d6d4d4";
 											ctx.stroke();
 											
 											
+											/* LEGEND X */
+											ctx.beginPath();
+											ctx.moveTo(0,150);
+											<?php
+											for( $i=1;$i<=count($array_x_pltvalue);$i++ ){
+												?>
+												ctx.fillText("<?php echo $array_x_pltvalue[($i-1)]; ?>",<?php echo ($i*6); ?>,170);
+												<?php
+											}
+											?>
+											
+											/* VALUE */
 											ctx.beginPath();
 											ctx.moveTo(0, 150);
-											/*
-<?php
-												for($i=0;$i<300;$i++){
-													$x_coor = $i*10;
-													?>
-													ctx.lineTo(<?php echo $x_coor ?>,<?php echo rand(20,130) ?>);
-													<?php
-												}
+											<?php
+											for( $i=1;$i<=count($array_x_pltvalue);$i++ ){
+												
+												$default_pltvalue = $array_x_pltvalue[($i-1)];
+												$reverse_pltvalue = 150 - ($default_pltvalue*5);
+												$last_i = $i;
+												?>
+												ctx.lineTo( <?php echo ($i*6); ?> , <?php echo $reverse_pltvalue; ?> );
+												<?php
+											}
 											?>
-*/	
-											
-											ctx.lineTo(5,149);
-											ctx.lineTo(10,145);
-											ctx.lineTo(15,140);
-											ctx.lineTo(20,133);
-											ctx.lineTo(25,100);
-											ctx.lineTo(30,80);
-											ctx.lineTo(35,70);
-											ctx.lineTo(40,60);
-											ctx.lineTo(45,50);
-											ctx.lineTo(50,40);
-											ctx.lineTo(55,30);
-											ctx.lineTo(60,20);
-											ctx.lineTo(65,10);
-											ctx.lineTo(70,9);
-											ctx.lineTo(75,10);
-											ctx.lineTo(80,20);
-											ctx.lineTo(85,30);
-											ctx.lineTo(90,40);
-											ctx.lineTo(95,50);
-											ctx.lineTo(100,80);
-											ctx.lineTo(105,100);
-											ctx.lineTo(110,110);
-											ctx.lineTo(115,115);
-											ctx.lineTo(120,120);
-											ctx.lineTo(125,125);
-											ctx.lineTo(130,130);
-											ctx.lineTo(135,131);
-											ctx.lineTo(140,130);
-											ctx.lineTo(145,131);
-											ctx.lineTo(140,130);
-											ctx.lineTo(145,131);
-											ctx.lineTo(140,130);
-											ctx.lineTo(145,131);
-											ctx.lineTo(170,130);
-											ctx.lineTo(175,130);
-											ctx.lineTo(180,131);
-											ctx.lineTo(185,130);
-											ctx.lineTo(190,131);
-											ctx.lineTo(195,130);
-											ctx.lineTo(200,131);
-											ctx.lineTo(205,130);
-											ctx.lineTo(210,131);
-											ctx.lineTo(215,130);
-											ctx.lineTo(220,131);
-											ctx.lineTo(225,130);
-											ctx.lineTo(230,131);
-											ctx.lineTo(235,130);
-											ctx.lineTo(240,131);
-											ctx.lineTo(245,130);
-											ctx.lineTo(250,131);
-											ctx.lineTo(255,130);
-											ctx.lineTo(260,131);
-											ctx.lineTo(265,130);
-											ctx.lineTo(270,131);
-											ctx.lineTo(275,130);
-											ctx.lineTo(280,131);
-											ctx.lineTo(285,130);
-											ctx.lineTo(290,131);
-											ctx.lineTo(295,130);
-											ctx.lineTo(300,131);
-											ctx.lineTo(400,150);
+											ctx.lineTo( <?php echo ($last_i*6); ?> , 150 );
 											ctx.stroke();
 											ctx.fillStyle = "rgba(0, 255, 0, 0.6)";
 											ctx.fill();
+											
 										</script>
 
 
-							            <canvas id="rbc-chart" height="150" style="margin-top:50px;"></canvas>
+
+
+										<?php
+										$x_pltvalue = $arr[0]['plt_value'];
+										$x_rbcvalue = $arr[0]['rbc_value'];
+										$x_wbcvalue = $arr[0]['wbc_value'];
+										
+										$sanitize_x_rbcvalue = str_replace('[', '', $x_rbcvalue);
+										$sanitize_x_rbcvalue2 = str_replace(']', '', $sanitize_x_rbcvalue);
+										$array_x_rbcvalue = explode(',', $sanitize_x_rbcvalue2);
+							        	?>
+										<div style="margin-top:50px;margin-bottom:10px;"><span style="background:rgba(255, 0, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>RBC</div>
+							            <canvas id="rbc-chart" height="150"></canvas>
 							            <script>
 											var c = document.getElementById("rbc-chart");
 											var ctx = c.getContext("2d");
@@ -475,7 +450,7 @@ $site_url = 'http://localhost/development_site/osh';
 											
 											/* VERTICAL RULER */
 											ctx.moveTo(10, 0);
-											ctx.lineTo(10, 150);
+											ctx.lineTo(10, 300);
 											ctx.moveTo(20,0);
 											ctx.lineTo(20,150);
 											ctx.moveTo(30,0);
@@ -495,7 +470,7 @@ $site_url = 'http://localhost/development_site/osh';
 											ctx.moveTo(100,0);
 											ctx.lineTo(100,150);
 											ctx.moveTo(110, 0);
-											ctx.lineTo(110, 150);
+											ctx.lineTo(110, 300);
 											ctx.moveTo(120,0);
 											ctx.lineTo(120,150);
 											ctx.moveTo(130,0);
@@ -514,8 +489,8 @@ $site_url = 'http://localhost/development_site/osh';
 											ctx.lineTo(190,150);
 											ctx.moveTo(200,0);
 											ctx.lineTo(200,150);
-											ctx.moveTo(210, 0);
-											ctx.lineTo(210, 150);
+											ctx.moveTo(210,0);
+											ctx.lineTo(210,150);
 											ctx.moveTo(220,0);
 											ctx.lineTo(220,150);
 											ctx.moveTo(230,0);
@@ -538,86 +513,38 @@ $site_url = 'http://localhost/development_site/osh';
 											ctx.stroke();
 											
 											
+											/* VALUE */
 											ctx.beginPath();
-											ctx.moveTo(0, 150);
-											/*
-<?php
-												for($i=0;$i<300;$i++){
-													$x_coor = $i*10;
-													?>
-													ctx.lineTo(<?php echo $x_coor ?>,<?php echo rand(20,130) ?>);
-													<?php
-												}
+											ctx.moveTo(0,150);
+											<?php
+											for( $i=1;$i<=count($array_x_rbcvalue);$i++ ){
+												
+												$default_rbcvalue = $array_x_rbcvalue[($i-1)];
+												$reverse_rbcvalue = 150 - ($default_rbcvalue/2);
+												$last_i = $i;
+												?>
+												ctx.lineTo( <?php echo ($i*5); ?> , <?php echo $reverse_rbcvalue; ?> );
+												<?php
+											}
 											?>
-*/	
-											
-											ctx.lineTo(5,149);
-											ctx.lineTo(10,145);
-											ctx.lineTo(15,140);
-											ctx.lineTo(20,133);
-											ctx.lineTo(25,100);
-											ctx.lineTo(30,80);
-											ctx.lineTo(35,70);
-											ctx.lineTo(40,60);
-											ctx.lineTo(45,50);
-											ctx.lineTo(50,40);
-											ctx.lineTo(55,30);
-											ctx.lineTo(60,20);
-											ctx.lineTo(65,10);
-											ctx.lineTo(70,9);
-											ctx.lineTo(75,10);
-											ctx.lineTo(80,20);
-											ctx.lineTo(85,30);
-											ctx.lineTo(90,40);
-											ctx.lineTo(95,50);
-											ctx.lineTo(100,80);
-											ctx.lineTo(105,100);
-											ctx.lineTo(110,110);
-											ctx.lineTo(115,115);
-											ctx.lineTo(120,120);
-											ctx.lineTo(125,125);
-											ctx.lineTo(130,130);
-											ctx.lineTo(135,131);
-											ctx.lineTo(140,130);
-											ctx.lineTo(145,131);
-											ctx.lineTo(140,130);
-											ctx.lineTo(145,131);
-											ctx.lineTo(140,130);
-											ctx.lineTo(145,131);
-											ctx.lineTo(170,130);
-											ctx.lineTo(175,130);
-											ctx.lineTo(180,131);
-											ctx.lineTo(185,130);
-											ctx.lineTo(190,131);
-											ctx.lineTo(195,130);
-											ctx.lineTo(200,131);
-											ctx.lineTo(205,130);
-											ctx.lineTo(210,131);
-											ctx.lineTo(215,130);
-											ctx.lineTo(220,131);
-											ctx.lineTo(225,130);
-											ctx.lineTo(230,131);
-											ctx.lineTo(235,130);
-											ctx.lineTo(240,131);
-											ctx.lineTo(245,130);
-											ctx.lineTo(250,131);
-											ctx.lineTo(255,130);
-											ctx.lineTo(260,131);
-											ctx.lineTo(265,130);
-											ctx.lineTo(270,131);
-											ctx.lineTo(275,130);
-											ctx.lineTo(280,131);
-											ctx.lineTo(285,130);
-											ctx.lineTo(290,131);
-											ctx.lineTo(295,130);
-											ctx.lineTo(300,131);
-											ctx.lineTo(400,150);
+											ctx.lineTo( <?php echo ($last_i*5); ?> , 300 );
 											ctx.stroke();
 											ctx.fillStyle = "rgba(255, 0, 0, 0.6)";
 											ctx.fill();
 										</script>
+
+
+										<?php
+										$x_wbcvalue = $arr[0]['wbc_value'];
+										$x_rbcvalue = $arr[0]['rbc_value'];
+										$x_wbcvalue = $arr[0]['wbc_value'];
 										
-							            <canvas id="wbc-chart" height="150" style="margin-top:50px;"></canvas>
+										$sanitize_x_wbcvalue = str_replace('[', '', $x_wbcvalue);
+										$sanitize_x_wbcvalue2 = str_replace(']', '', $sanitize_x_wbcvalue);
+										$array_x_wbcvalue = explode(',', $sanitize_x_wbcvalue2);
+							        	?>
+										<div style="margin-top:50px;margin-bottom:10px;"><span style="background:rgba(255, 255, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>WBC</div>
+							            <canvas id="wbc-chart" height="150"></canvas>
 							            <script>
 											var c = document.getElementById("wbc-chart");
 											var ctx = c.getContext("2d");
@@ -704,82 +631,26 @@ $site_url = 'http://localhost/development_site/osh';
 											
 											ctx.beginPath();
 											ctx.moveTo(0, 150);
-											/*
-<?php
-												for($i=0;$i<300;$i++){
-													$x_coor = $i*10;
-													?>
-													ctx.lineTo(<?php echo $x_coor ?>,<?php echo rand(20,130) ?>);
-													<?php
-												}
+											/* VALUE */
+											ctx.beginPath();
+											ctx.moveTo(0, 150);
+											<?php
+											for( $i=1;$i<=count($array_x_wbcvalue);$i++ ){
+												
+												$default_wbcvalue = $array_x_wbcvalue[($i-1)];
+												$reverse_wbcvalue = 150 - ($default_wbcvalue*3);
+												$last_i = $i;
+												?>
+												ctx.lineTo( <?php echo ($i*5); ?> , <?php echo $reverse_wbcvalue; ?> );
+												<?php
+											}
 											?>
-*/	
-											
-											ctx.lineTo(5,149);
-											ctx.lineTo(10,145);
-											ctx.lineTo(15,140);
-											ctx.lineTo(20,133);
-											ctx.lineTo(25,100);
-											ctx.lineTo(30,80);
-											ctx.lineTo(35,70);
-											ctx.lineTo(40,60);
-											ctx.lineTo(45,50);
-											ctx.lineTo(50,40);
-											ctx.lineTo(55,30);
-											ctx.lineTo(60,20);
-											ctx.lineTo(65,10);
-											ctx.lineTo(70,9);
-											ctx.lineTo(75,10);
-											ctx.lineTo(80,20);
-											ctx.lineTo(85,30);
-											ctx.lineTo(90,40);
-											ctx.lineTo(95,50);
-											ctx.lineTo(100,80);
-											ctx.lineTo(105,100);
-											ctx.lineTo(110,110);
-											ctx.lineTo(115,115);
-											ctx.lineTo(120,120);
-											ctx.lineTo(125,125);
-											ctx.lineTo(130,130);
-											ctx.lineTo(135,131);
-											ctx.lineTo(140,130);
-											ctx.lineTo(145,131);
-											ctx.lineTo(140,130);
-											ctx.lineTo(145,131);
-											ctx.lineTo(140,130);
-											ctx.lineTo(145,131);
-											ctx.lineTo(170,130);
-											ctx.lineTo(175,130);
-											ctx.lineTo(180,131);
-											ctx.lineTo(185,130);
-											ctx.lineTo(190,131);
-											ctx.lineTo(195,130);
-											ctx.lineTo(200,131);
-											ctx.lineTo(205,130);
-											ctx.lineTo(210,131);
-											ctx.lineTo(215,130);
-											ctx.lineTo(220,131);
-											ctx.lineTo(225,130);
-											ctx.lineTo(230,131);
-											ctx.lineTo(235,130);
-											ctx.lineTo(240,131);
-											ctx.lineTo(245,130);
-											ctx.lineTo(250,131);
-											ctx.lineTo(255,130);
-											ctx.lineTo(260,131);
-											ctx.lineTo(265,130);
-											ctx.lineTo(270,131);
-											ctx.lineTo(275,130);
-											ctx.lineTo(280,131);
-											ctx.lineTo(285,130);
-											ctx.lineTo(290,131);
-											ctx.lineTo(295,130);
-											ctx.lineTo(300,131);
-											ctx.lineTo(400,150);
+											ctx.lineTo( <?php echo ($last_i*5); ?> , 150 );
 											ctx.stroke();
 											ctx.fillStyle = "rgba(255, 255, 0, 0.6)";
 											ctx.fill();
 										</script>
+
 							            							        
 							    </div>
 							</div>
