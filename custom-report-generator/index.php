@@ -342,40 +342,53 @@ $x_wbcvalue = $arr[0]['wbc_value'];
 							        
 							        	<?php
 										$x_pltvalue = $arr[0]['plt_value'];
-										$x_rbcvalue = $arr[0]['rbc_value'];
-										$x_wbcvalue = $arr[0]['wbc_value'];
-										
 										$sanitize_x_pltvalue = str_replace('[', '', $x_pltvalue);
 										$sanitize_x_pltvalue2 = str_replace(']', '', $sanitize_x_pltvalue);
 										$array_x_pltvalue = explode(',', $sanitize_x_pltvalue2);
+										
+										$plt_graph_setting['y_max'] = 30;
+										$plt_graph_setting['count_x'] = count($array_x_pltvalue);
+										$plt_graph_setting['graph_width'] = 400;
+										$plt_graph_setting['graph_height'] = 150;
+										$plt_graph_setting['graph_canvas_height'] = $plt_graph_setting['graph_height']+20;
+										$plt_graph_setting['y_divider'] = 3;
+										$plt_graph_setting['x_index_skipper'] = 3;
+										$plt_graph_setting['x_legend_position_adjustment'] = 2;
+										$plt_graph_setting['graph_padding_left'] = 20;
+										$plt_graph_setting['legend_y_padding_top'] = 10;
+										$plt_graph_setting['value_multiplier'] = 5;
 							        	?>
 							        	<div style="margin-bottom:10px;"><span style="background:rgba(0, 255, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>PLT</div>
-							            <canvas id="plt-chart" height="170" width="400"></canvas>
+							            <canvas id="plt-chart" height="<?php echo $plt_graph_setting['graph_canvas_height'];?>" width="<?php echo $plt_graph_setting['graph_width'];?>"></canvas>
 							            <script>
 											var c = document.getElementById("plt-chart");
 											var ctx = c.getContext("2d");
 											ctx.beginPath();
-											ctx.moveTo(0, 0);
-											ctx.lineTo(0, 150);
-											ctx.lineTo(480, 150);
+											ctx.moveTo(<?php echo $plt_graph_setting['graph_padding_left'];?>,0);
+											ctx.lineTo(<?php echo $plt_graph_setting['graph_padding_left'];?>,<?php echo $plt_graph_setting['graph_height'];?>);
+											ctx.lineTo(<?php echo $plt_graph_setting['graph_width']+$plt_graph_setting['graph_padding_left'];?>,<?php echo $plt_graph_setting['graph_height'];?>);
+											ctx.moveTo(<?php echo $plt_graph_setting['graph_padding_left'];?>,0);
+											ctx.lineTo(<?php echo $plt_graph_setting['graph_width'];?>,0);
 											ctx.stroke();
 											
 											/* HORIZONTAL RULER */
-											ctx.moveTo(0,50);
-											ctx.lineTo(480,50);
-											ctx.moveTo(0,100);
-											ctx.lineTo(480,100);
-											ctx.moveTo(0,150);
-											ctx.lineTo(480,150);
+											<?php
+											for( $i=0;$i<$plt_graph_setting['y_divider'];$i++ ){
+												?>
+												ctx.moveTo(<?php echo $plt_graph_setting['graph_padding_left'];?>,<?php echo ($i+1)*($plt_graph_setting['graph_height']/$plt_graph_setting['y_divider']) ?>);
+												ctx.lineTo(<?php echo $plt_graph_setting['graph_width'];?>,<?php echo ($i+1)*($plt_graph_setting['graph_height']/$plt_graph_setting['y_divider']) ?>);
+												<?php
+											}
+											?>
 											ctx.strokeStyle="#d6d4d4";
 											ctx.stroke();
 											
 											/* VERTICAL RULER */
 											<?php
-											for( $i=0;$i<48;$i++ ){
+											for( $i=0;$i<$plt_graph_setting['count_x'];$i=$i+$plt_graph_setting['x_index_skipper'] ){
 												?>
-												ctx.moveTo( <?php echo (($i+1)*10);?> , 0);
-												ctx.lineTo( <?php echo (($i+1)*10);?> , 150);
+												ctx.moveTo( <?php echo ((($i)*($plt_graph_setting['graph_width']/$plt_graph_setting['count_x']))+$plt_graph_setting['graph_padding_left']);?> , 0);
+												ctx.lineTo( <?php echo ((($i)*($plt_graph_setting['graph_width']/$plt_graph_setting['count_x']))+$plt_graph_setting['graph_padding_left']);?> , <?php echo $plt_graph_setting['graph_height'];?>);
 												<?php
 											}
 											?>
@@ -385,30 +398,42 @@ $x_wbcvalue = $arr[0]['wbc_value'];
 											
 											/* LEGEND X */
 											ctx.beginPath();
-											ctx.moveTo(0,150);
+											ctx.moveTo(<?php echo $plt_graph_setting['graph_padding_left'];?>,<?php echo $plt_graph_setting['graph_height'];?>);
 											<?php
-											for( $i=1;$i<=count($array_x_pltvalue);$i++ ){
+											for( $i=0;$i<$plt_graph_setting['count_x'];$i=$i+$plt_graph_setting['x_index_skipper'] ){
 												?>
-												ctx.fillText("<?php echo $array_x_pltvalue[($i-1)]; ?>",<?php echo ($i*6); ?>,170);
+												ctx.fillText("<?php echo $array_x_pltvalue[$i]; ?>",<?php echo (((($i)*($plt_graph_setting['graph_width']/$plt_graph_setting['count_x']))-$plt_graph_setting['x_legend_position_adjustment'])+$plt_graph_setting['graph_padding_left']);?>,<?php echo $plt_graph_setting['graph_canvas_height'];?>);
 												<?php
 											}
 											?>
 											
+											/* LEGEND Y */
+											<?php
+											for( $i=0;$i<=$plt_graph_setting['y_divider'];$i++ ){
+												if( $i < $plt_graph_setting['y_divider'] ){
+													?>
+													ctx.fillText("<?php echo($plt_graph_setting['y_max']-($i*$plt_graph_setting['y_max']/$plt_graph_setting['y_divider'])) ;?>",0,<?php echo (($i*$plt_graph_setting['graph_height']/$plt_graph_setting['y_divider'])+$plt_graph_setting['legend_y_padding_top']); ?>);
+													<?php	
+												}
+											}
+											?>
+											ctx.strokeStyle="#d6d4d4";
+											ctx.stroke();
+											
 											/* VALUE */
 											ctx.beginPath();
-											ctx.moveTo(0, 150);
+											ctx.moveTo(<?php echo $plt_graph_setting['graph_padding_left'];?>,<?php echo $plt_graph_setting['graph_height'];?>);
 											<?php
-											for( $i=1;$i<=count($array_x_pltvalue);$i++ ){
+											for( $i=0;$i<=$plt_graph_setting['count_x'];$i++ ){
 												
-												$default_pltvalue = $array_x_pltvalue[($i-1)];
-												$reverse_pltvalue = 150 - ($default_pltvalue*5);
+												$default_pltvalue = $array_x_pltvalue[$i];
+												$reverse_pltvalue = $plt_graph_setting['graph_height'] - ($default_pltvalue*$plt_graph_setting['value_multiplier']);
 												$last_i = $i;
 												?>
-												ctx.lineTo( <?php echo ($i*6); ?> , <?php echo $reverse_pltvalue; ?> );
+												ctx.lineTo( <?php echo ((($i)*($plt_graph_setting['graph_width']/$plt_graph_setting['count_x']))+$plt_graph_setting['graph_padding_left']);?> , <?php echo $reverse_pltvalue; ?> );
 												<?php
 											}
 											?>
-											ctx.lineTo( <?php echo ($last_i*6); ?> , 150 );
 											ctx.stroke();
 											ctx.fillStyle = "rgba(0, 255, 0, 0.6)";
 											ctx.fill();
@@ -419,236 +444,206 @@ $x_wbcvalue = $arr[0]['wbc_value'];
 
 
 										<?php
-										$x_pltvalue = $arr[0]['plt_value'];
 										$x_rbcvalue = $arr[0]['rbc_value'];
-										$x_wbcvalue = $arr[0]['wbc_value'];
-										
 										$sanitize_x_rbcvalue = str_replace('[', '', $x_rbcvalue);
 										$sanitize_x_rbcvalue2 = str_replace(']', '', $sanitize_x_rbcvalue);
 										$array_x_rbcvalue = explode(',', $sanitize_x_rbcvalue2);
+										
+										$rbc_graph_setting['y_max'] = 300;
+										$rbc_graph_setting['count_x'] = count($array_x_rbcvalue);
+										$rbc_graph_setting['graph_width'] = 400;
+										$rbc_graph_setting['graph_height'] = 150;
+										$rbc_graph_setting['graph_canvas_height'] = $rbc_graph_setting['graph_height']+20;
+										$rbc_graph_setting['y_divider'] = 3;
+										$rbc_graph_setting['x_index_skipper'] = 5;
+										$rbc_graph_setting['x_legend_position_adjustment'] = 2;
+										$rbc_graph_setting['graph_padding_left'] = 20;
+										$rbc_graph_setting['legend_y_padding_top'] = 10;
+										$plt_graph_setting['value_multiplier'] = 0.5;
 							        	?>
-										<div style="margin-top:50px;margin-bottom:10px;"><span style="background:rgba(255, 0, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>RBC</div>
-							            <canvas id="rbc-chart" height="150"></canvas>
+							        	<div style="margin-top:25px;margin-bottom:10px;"><span style="background:rgba(255, 0, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>RBC</div>
+							            <canvas id="rbc-chart" height="<?php echo $plt_graph_setting['graph_canvas_height'];?>" width="<?php echo $rbc_graph_setting['graph_width'];?>"></canvas>
 							            <script>
 											var c = document.getElementById("rbc-chart");
 											var ctx = c.getContext("2d");
 											ctx.beginPath();
-											ctx.moveTo(0, 0);
-											ctx.lineTo(0, 150);
-											ctx.lineTo(300, 150);
+											ctx.moveTo(<?php echo $rbc_graph_setting['graph_padding_left'];?>,0);
+											ctx.lineTo(<?php echo $rbc_graph_setting['graph_padding_left'];?>,<?php echo $rbc_graph_setting['graph_height'];?>);
+											ctx.lineTo(<?php echo $rbc_graph_setting['graph_width']+$rbc_graph_setting['graph_padding_left'];?>,<?php echo $rbc_graph_setting['graph_height'];?>);
+											ctx.moveTo(<?php echo $rbc_graph_setting['graph_padding_left'];?>,0);
+											ctx.lineTo(<?php echo $rbc_graph_setting['graph_width'];?>,0);
 											ctx.stroke();
 											
 											/* HORIZONTAL RULER */
-											ctx.moveTo(0,50);
-											ctx.lineTo(300,50);
-											ctx.moveTo(0,100);
-											ctx.lineTo(300,100);
-											ctx.moveTo(0,150);
-											ctx.lineTo(300,150);
+											<?php
+											for( $i=0;$i<$rbc_graph_setting['y_divider'];$i++ ){
+												?>
+												ctx.moveTo(<?php echo $rbc_graph_setting['graph_padding_left'];?>,<?php echo ($i+1)*($rbc_graph_setting['graph_height']/$rbc_graph_setting['y_divider']) ?>);
+												ctx.lineTo(<?php echo $rbc_graph_setting['graph_width'];?>,<?php echo ($i+1)*($rbc_graph_setting['graph_height']/$rbc_graph_setting['y_divider']) ?>);
+												<?php
+											}
+											?>
 											ctx.strokeStyle="#d6d4d4";
 											ctx.stroke();
 											
 											/* VERTICAL RULER */
-											ctx.moveTo(10, 0);
-											ctx.lineTo(10, 300);
-											ctx.moveTo(20,0);
-											ctx.lineTo(20,150);
-											ctx.moveTo(30,0);
-											ctx.lineTo(30,150);
-											ctx.moveTo(40,0);
-											ctx.lineTo(40,150);
-											ctx.moveTo(50,0);
-											ctx.lineTo(50,150);
-											ctx.moveTo(60,0);
-											ctx.lineTo(60,150);
-											ctx.moveTo(70,0);
-											ctx.lineTo(70,150);
-											ctx.moveTo(80,0);
-											ctx.lineTo(80,150);
-											ctx.moveTo(90,0);
-											ctx.lineTo(90,150);
-											ctx.moveTo(100,0);
-											ctx.lineTo(100,150);
-											ctx.moveTo(110, 0);
-											ctx.lineTo(110, 300);
-											ctx.moveTo(120,0);
-											ctx.lineTo(120,150);
-											ctx.moveTo(130,0);
-											ctx.lineTo(130,150);
-											ctx.moveTo(140,0);
-											ctx.lineTo(140,150);
-											ctx.moveTo(150,0);
-											ctx.lineTo(150,150);
-											ctx.moveTo(160,0);
-											ctx.lineTo(160,150);
-											ctx.moveTo(170,0);
-											ctx.lineTo(170,150);
-											ctx.moveTo(180,0);
-											ctx.lineTo(180,150);
-											ctx.moveTo(190,0);
-											ctx.lineTo(190,150);
-											ctx.moveTo(200,0);
-											ctx.lineTo(200,150);
-											ctx.moveTo(210,0);
-											ctx.lineTo(210,150);
-											ctx.moveTo(220,0);
-											ctx.lineTo(220,150);
-											ctx.moveTo(230,0);
-											ctx.lineTo(230,150);
-											ctx.moveTo(240,0);
-											ctx.lineTo(240,150);
-											ctx.moveTo(250,0);
-											ctx.lineTo(250,150);
-											ctx.moveTo(260,0);
-											ctx.lineTo(260,150);
-											ctx.moveTo(270,0);
-											ctx.lineTo(270,150);
-											ctx.moveTo(280,0);
-											ctx.lineTo(280,150);
-											ctx.moveTo(290,0);
-											ctx.lineTo(290,150);
-											ctx.moveTo(300,0);
-											ctx.lineTo(300,150);
+											<?php
+											for( $i=0;$i<$rbc_graph_setting['count_x'];$i=$i+$rbc_graph_setting['x_index_skipper'] ){
+												?>
+												ctx.moveTo( <?php echo ((($i)*($rbc_graph_setting['graph_width']/$rbc_graph_setting['count_x']))+$rbc_graph_setting['graph_padding_left']);?> , 0);
+												ctx.lineTo( <?php echo ((($i)*($rbc_graph_setting['graph_width']/$rbc_graph_setting['count_x']))+$rbc_graph_setting['graph_padding_left']);?> , <?php echo $rbc_graph_setting['graph_height'];?>);
+												<?php
+											}
+											?>
 											ctx.strokeStyle="#d6d4d4";
 											ctx.stroke();
 											
 											
-											/* VALUE */
+											/* LEGEND X */
 											ctx.beginPath();
-											ctx.moveTo(0,150);
+											ctx.moveTo(<?php echo $rbc_graph_setting['graph_padding_left'];?>,<?php echo $rbc_graph_setting['graph_height'];?>);
 											<?php
-											for( $i=1;$i<=count($array_x_rbcvalue);$i++ ){
-												
-												$default_rbcvalue = $array_x_rbcvalue[($i-1)];
-												$reverse_rbcvalue = 150 - ($default_rbcvalue/2);
-												$last_i = $i;
+											for( $i=0;$i<$rbc_graph_setting['count_x'];$i=$i+$rbc_graph_setting['x_index_skipper'] ){
 												?>
-												ctx.lineTo( <?php echo ($i*5); ?> , <?php echo $reverse_rbcvalue; ?> );
+												ctx.fillText("<?php echo $array_x_rbcvalue[$i]; ?>",<?php echo (((($i)*($rbc_graph_setting['graph_width']/$rbc_graph_setting['count_x']))-$rbc_graph_setting['x_legend_position_adjustment'])+$rbc_graph_setting['graph_padding_left']);?>,<?php echo $rbc_graph_setting['graph_canvas_height'];?>);
 												<?php
 											}
 											?>
-											ctx.lineTo( <?php echo ($last_i*5); ?> , 300 );
+											
+											/* LEGEND Y */
+											<?php
+											for( $i=0;$i<=$rbc_graph_setting['y_divider'];$i++ ){
+												if( $i < $rbc_graph_setting['y_divider'] ){
+													?>
+													ctx.fillText("<?php echo($rbc_graph_setting['y_max']-($i*$rbc_graph_setting['y_max']/$rbc_graph_setting['y_divider'])) ;?>",0,<?php echo (($i*$rbc_graph_setting['graph_height']/$rbc_graph_setting['y_divider'])+$rbc_graph_setting['legend_y_padding_top']); ?>);
+													<?php	
+												}
+											}
+											?>
+											ctx.strokeStyle="#d6d4d4";
+											ctx.stroke();
+											
+											/* VALUE */
+											ctx.beginPath();
+											ctx.moveTo(<?php echo $rbc_graph_setting['graph_padding_left'];?>,<?php echo $rbc_graph_setting['graph_height'];?>);
+											<?php
+											for( $i=0;$i<=$rbc_graph_setting['count_x'];$i++ ){
+												
+												$default_rbcvalue = $array_x_rbcvalue[$i];
+												$reverse_rbcvalue = $rbc_graph_setting['graph_height'] - ($default_rbcvalue*$plt_graph_setting['value_multiplier']);
+												$last_i = $i;
+												?>
+												ctx.lineTo( <?php echo ((($i)*($rbc_graph_setting['graph_width']/$rbc_graph_setting['count_x']))+$rbc_graph_setting['graph_padding_left']);?> , <?php echo $reverse_rbcvalue; ?> );
+												<?php
+											}
+											?>
 											ctx.stroke();
 											ctx.fillStyle = "rgba(255, 0, 0, 0.6)";
 											ctx.fill();
+											
 										</script>
+
+
 
 
 										<?php
 										$x_wbcvalue = $arr[0]['wbc_value'];
-										$x_rbcvalue = $arr[0]['rbc_value'];
-										$x_wbcvalue = $arr[0]['wbc_value'];
-										
 										$sanitize_x_wbcvalue = str_replace('[', '', $x_wbcvalue);
 										$sanitize_x_wbcvalue2 = str_replace(']', '', $sanitize_x_wbcvalue);
 										$array_x_wbcvalue = explode(',', $sanitize_x_wbcvalue2);
+										
+										$wbc_graph_setting['y_max'] = 50;
+										$wbc_graph_setting['count_x'] = count($array_x_wbcvalue);
+										$wbc_graph_setting['graph_width'] = 400;
+										$wbc_graph_setting['graph_height'] = 150;
+										$wbc_graph_setting['graph_canvas_height'] = $wbc_graph_setting['graph_height']+20;
+										$wbc_graph_setting['y_divider'] = 5;
+										$wbc_graph_setting['x_index_skipper'] = 3;
+										$wbc_graph_setting['x_legend_position_adjustment'] = 2;
+										$wbc_graph_setting['graph_padding_left'] = 20;
+										$wbc_graph_setting['legend_y_padding_top'] = 10;
+										$plt_graph_setting['value_multiplier'] = 3;
 							        	?>
-										<div style="margin-top:50px;margin-bottom:10px;"><span style="background:rgba(255, 255, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>WBC</div>
-							            <canvas id="wbc-chart" height="150"></canvas>
+							        	<div style="margin-top:25px;margin-bottom:10px;"><span style="background:rgba(255, 255, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>RBC</div>
+							            <canvas id="wbc-chart" height="<?php echo $plt_graph_setting['graph_canvas_height'];?>" width="<?php echo $wbc_graph_setting['graph_width'];?>"></canvas>
 							            <script>
 											var c = document.getElementById("wbc-chart");
 											var ctx = c.getContext("2d");
 											ctx.beginPath();
-											ctx.moveTo(0, 0);
-											ctx.lineTo(0, 150);
-											ctx.lineTo(300, 150);
+											ctx.moveTo(<?php echo $wbc_graph_setting['graph_padding_left'];?>,0);
+											ctx.lineTo(<?php echo $wbc_graph_setting['graph_padding_left'];?>,<?php echo $wbc_graph_setting['graph_height'];?>);
+											ctx.lineTo(<?php echo $wbc_graph_setting['graph_width']+$wbc_graph_setting['graph_padding_left'];?>,<?php echo $wbc_graph_setting['graph_height'];?>);
+											ctx.moveTo(<?php echo $wbc_graph_setting['graph_padding_left'];?>,0);
+											ctx.lineTo(<?php echo $wbc_graph_setting['graph_width'];?>,0);
 											ctx.stroke();
 											
 											/* HORIZONTAL RULER */
-											ctx.moveTo(0,50);
-											ctx.lineTo(300,50);
-											ctx.moveTo(0,100);
-											ctx.lineTo(300,100);
-											ctx.moveTo(0,150);
-											ctx.lineTo(300,150);
+											<?php
+											for( $i=0;$i<$wbc_graph_setting['y_divider'];$i++ ){
+												?>
+												ctx.moveTo(<?php echo $wbc_graph_setting['graph_padding_left'];?>,<?php echo ($i+1)*($wbc_graph_setting['graph_height']/$wbc_graph_setting['y_divider']) ?>);
+												ctx.lineTo(<?php echo $wbc_graph_setting['graph_width'];?>,<?php echo ($i+1)*($wbc_graph_setting['graph_height']/$wbc_graph_setting['y_divider']) ?>);
+												<?php
+											}
+											?>
 											ctx.strokeStyle="#d6d4d4";
 											ctx.stroke();
 											
 											/* VERTICAL RULER */
-											ctx.moveTo(10, 0);
-											ctx.lineTo(10, 150);
-											ctx.moveTo(20,0);
-											ctx.lineTo(20,150);
-											ctx.moveTo(30,0);
-											ctx.lineTo(30,150);
-											ctx.moveTo(40,0);
-											ctx.lineTo(40,150);
-											ctx.moveTo(50,0);
-											ctx.lineTo(50,150);
-											ctx.moveTo(60,0);
-											ctx.lineTo(60,150);
-											ctx.moveTo(70,0);
-											ctx.lineTo(70,150);
-											ctx.moveTo(80,0);
-											ctx.lineTo(80,150);
-											ctx.moveTo(90,0);
-											ctx.lineTo(90,150);
-											ctx.moveTo(100,0);
-											ctx.lineTo(100,150);
-											ctx.moveTo(110, 0);
-											ctx.lineTo(110, 150);
-											ctx.moveTo(120,0);
-											ctx.lineTo(120,150);
-											ctx.moveTo(130,0);
-											ctx.lineTo(130,150);
-											ctx.moveTo(140,0);
-											ctx.lineTo(140,150);
-											ctx.moveTo(150,0);
-											ctx.lineTo(150,150);
-											ctx.moveTo(160,0);
-											ctx.lineTo(160,150);
-											ctx.moveTo(170,0);
-											ctx.lineTo(170,150);
-											ctx.moveTo(180,0);
-											ctx.lineTo(180,150);
-											ctx.moveTo(190,0);
-											ctx.lineTo(190,150);
-											ctx.moveTo(200,0);
-											ctx.lineTo(200,150);
-											ctx.moveTo(210, 0);
-											ctx.lineTo(210, 150);
-											ctx.moveTo(220,0);
-											ctx.lineTo(220,150);
-											ctx.moveTo(230,0);
-											ctx.lineTo(230,150);
-											ctx.moveTo(240,0);
-											ctx.lineTo(240,150);
-											ctx.moveTo(250,0);
-											ctx.lineTo(250,150);
-											ctx.moveTo(260,0);
-											ctx.lineTo(260,150);
-											ctx.moveTo(270,0);
-											ctx.lineTo(270,150);
-											ctx.moveTo(280,0);
-											ctx.lineTo(280,150);
-											ctx.moveTo(290,0);
-											ctx.lineTo(290,150);
-											ctx.moveTo(300,0);
-											ctx.lineTo(300,150);
+											<?php
+											for( $i=0;$i<$wbc_graph_setting['count_x'];$i=$i+$wbc_graph_setting['x_index_skipper'] ){
+												?>
+												ctx.moveTo( <?php echo ((($i)*($wbc_graph_setting['graph_width']/$wbc_graph_setting['count_x']))+$wbc_graph_setting['graph_padding_left']);?> , 0);
+												ctx.lineTo( <?php echo ((($i)*($wbc_graph_setting['graph_width']/$wbc_graph_setting['count_x']))+$wbc_graph_setting['graph_padding_left']);?> , <?php echo $wbc_graph_setting['graph_height'];?>);
+												<?php
+											}
+											?>
 											ctx.strokeStyle="#d6d4d4";
 											ctx.stroke();
 											
 											
+											/* LEGEND X */
 											ctx.beginPath();
-											ctx.moveTo(0, 150);
-											/* VALUE */
-											ctx.beginPath();
-											ctx.moveTo(0, 150);
+											ctx.moveTo(<?php echo $wbc_graph_setting['graph_padding_left'];?>,<?php echo $wbc_graph_setting['graph_height'];?>);
 											<?php
-											for( $i=1;$i<=count($array_x_wbcvalue);$i++ ){
-												
-												$default_wbcvalue = $array_x_wbcvalue[($i-1)];
-												$reverse_wbcvalue = 150 - ($default_wbcvalue*3);
-												$last_i = $i;
+											for( $i=0;$i<$wbc_graph_setting['count_x'];$i=$i+$wbc_graph_setting['x_index_skipper'] ){
 												?>
-												ctx.lineTo( <?php echo ($i*5); ?> , <?php echo $reverse_wbcvalue; ?> );
+												ctx.fillText("<?php echo $array_x_wbcvalue[$i]; ?>",<?php echo (((($i)*($wbc_graph_setting['graph_width']/$wbc_graph_setting['count_x']))-$wbc_graph_setting['x_legend_position_adjustment'])+$wbc_graph_setting['graph_padding_left']);?>,<?php echo $wbc_graph_setting['graph_canvas_height'];?>);
 												<?php
 											}
 											?>
-											ctx.lineTo( <?php echo ($last_i*5); ?> , 150 );
+											
+											/* LEGEND Y */
+											<?php
+											for( $i=0;$i<=$wbc_graph_setting['y_divider'];$i++ ){
+												if( $i < $wbc_graph_setting['y_divider'] ){
+													?>
+													ctx.fillText("<?php echo($wbc_graph_setting['y_max']-($i*$wbc_graph_setting['y_max']/$wbc_graph_setting['y_divider'])) ;?>",0,<?php echo (($i*$wbc_graph_setting['graph_height']/$wbc_graph_setting['y_divider'])+$wbc_graph_setting['legend_y_padding_top']); ?>);
+													<?php	
+												}
+											}
+											?>
+											ctx.strokeStyle="#d6d4d4";
+											ctx.stroke();
+											
+											/* VALUE */
+											ctx.beginPath();
+											ctx.moveTo(<?php echo $wbc_graph_setting['graph_padding_left'];?>,<?php echo $wbc_graph_setting['graph_height'];?>);
+											<?php
+											for( $i=0;$i<=$wbc_graph_setting['count_x'];$i++ ){
+												
+												$default_wbcvalue = $array_x_wbcvalue[$i];
+												$reverse_wbcvalue = $wbc_graph_setting['graph_height'] - ($default_wbcvalue*$plt_graph_setting['value_multiplier']);
+												$last_i = $i;
+												?>
+												ctx.lineTo( <?php echo ((($i)*($wbc_graph_setting['graph_width']/$wbc_graph_setting['count_x']))+$wbc_graph_setting['graph_padding_left']);?> , <?php echo $reverse_wbcvalue; ?> );
+												<?php
+											}
+											?>
 											ctx.stroke();
 											ctx.fillStyle = "rgba(255, 255, 0, 0.6)";
 											ctx.fill();
+											
 										</script>
 
 							            							        
