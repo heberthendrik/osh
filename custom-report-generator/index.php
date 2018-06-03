@@ -39,9 +39,17 @@ $x_catatan1 = $drr[0]['catatan_1'];
 $x_catatan2 = $drr[0]['catatan_2'];
 $x_dokteracc = $drr[0]['nm_dokter_acc'];
 $x_pemeriksa = $drr[0]['nm_pemeriksa'];
+$x_idrs = $drr[0]['id_rs'];
 
-/* table */
+/* AMBIL LOGO RS */
+$result = pg_query($dbconn, "SELECT * FROM tab_rs where id = '".$x_idrs."' ");
+if (!$result) {
+    echo "An error occurred.\n";
+    exit;
+}
 
+$lrr = pg_fetch_all($result);
+$x_logors = $lrr[0]['logo'];
 
 /* AMBIL DATA HISTOGRAM */
 $result = pg_query($dbconn, "SELECT * FROM tab_lab_histogram where id = '".$_GET['lid']."' ");
@@ -106,9 +114,16 @@ $x_wbcvalue = $arr[0]['wbc_value'];
 		<div class="row">
 			<div class="col-md-12">
 				<section class="panel">
+					<header class="panel-heading" style="background:transparent;">
+						<div class="row">
+							<img src="<?php echo $site_url.'/storage/app/public/'.$x_logors;?>" style="max-height:40px;height:100%;width:auto;margin-right:25px;">
+						</div>
+					</header>
 					<header class="panel-heading">
-						<div class="row">					
-							<h2 class="panel-title" style="padding-left:15px;"><?php echo $x_id;?> - <?php echo $x_nama;?></h2>
+						<div class="row">
+							<h2 class="panel-title" style="padding-left:15px;">
+								<?php echo $x_id;?> - <?php echo $x_nama;?>
+							</h2>
 							<div class="pull-right" style="padding-right:20px;float:right;position:absolute;right:0;top:0;margin-top:15px;">
 <!-- 								{!! DNS1D::getBarcodeHTML($result->no_lab, "C128", '1','30')!!} -->
 							</div>
