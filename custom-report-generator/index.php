@@ -115,15 +115,17 @@ $x_wbcvalue = $arr[0]['wbc_value'];
 			<div class="col-md-12">
 				<section class="panel">
 					<header class="panel-heading" style="background:transparent;">
-						<div class="row">
-							<img src="<?php echo $site_url.'/storage/app/public/'.$x_logors;?>" style="max-height:40px;height:100%;width:auto;margin-right:25px;">
+						<div class="row" style="background:#fdfdfd;padding:20px;border-radius:10px;">
+							
+							<img src="<?php echo $site_url;?>/public/hebert_admin/images/logo_swelab_transparent_horizontal.png" style="max-height:40px;height:100%;width:auto;margin-right:25px;">
+							<img src="<?php echo $site_url.'/storage/app/public/'.$x_logors;?>" style="max-height:40px;height:100%;width:auto;position:absolute;right:0;padding-right:20px;">
 						</div>
 					</header>
 					<header class="panel-heading">
 						<div class="row">
 							<h2 class="panel-title" style="padding-left:15px;">
 								<?php echo $x_id;?> - <?php echo $x_nama;?>
-								<img alt="testing" src="barcode_generator/barcode.php?text=<?php echo $x_id;?>" style="position:absolute;right:0;padding-right:20px;top:0;padding-top:10px;" />
+								<img alt="<?php echo $x_id;?>" src="barcode_generator/barcode.php?text=<?php echo $x_id;?>" style="position:absolute;right:0;padding-right:10px;top:0;padding-top:10px;" />
 							</h2>
 							<div class="pull-right" style="padding-right:20px;float:right;position:absolute;right:0;top:0;margin-top:15px;">
 <!-- 								{!! DNS1D::getBarcodeHTML($result->no_lab, "C128", '1','30')!!} -->
