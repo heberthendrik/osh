@@ -123,6 +123,7 @@ $x_wbcvalue = $arr[0]['wbc_value'];
 						<div class="row">
 							<h2 class="panel-title" style="padding-left:15px;">
 								<?php echo $x_id;?> - <?php echo $x_nama;?>
+								<img alt="testing" src="barcode_generator/barcode.php?text=<?php echo $x_id;?>" style="position:absolute;right:0;padding-right:20px;top:0;padding-top:10px;" />
 							</h2>
 							<div class="pull-right" style="padding-right:20px;float:right;position:absolute;right:0;top:0;margin-top:15px;">
 <!-- 								{!! DNS1D::getBarcodeHTML($result->no_lab, "C128", '1','30')!!} -->

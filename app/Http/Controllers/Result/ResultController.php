@@ -187,7 +187,7 @@ class ResultController extends Controller
     public function getPrint($id)
     {
     
-    	exec('/usr/local/bin/wkhtmltoimage --width 1400 --crop-h 800 --quality 100 http://localhost/development_site/osh/custom-report-generator/?lid='.$id.' /Users/heberthendrikpelapelapon/Downloads/bbbb.png');
+    	exec('/usr/local/bin/wkhtmltoimage --width 1400 --crop-h 900 --quality 100 http://localhost/development_site/osh/custom-report-generator/?lid='.$id.' /Users/heberthendrikpelapelapon/Downloads/bbbb.png');
     	
     	exec('mv /Users/heberthendrikpelapelapon/Downloads/bbbb.png /Applications/MAMP/htdocs/development_site/osh/custom-report-generator/bbbb.png');
     	
