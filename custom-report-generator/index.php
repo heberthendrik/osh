@@ -356,7 +356,7 @@ $x_wbcvalue = $arr[0]['wbc_value'];
 										$plt_graph_setting['x_legend_position_adjustment'] = 2;
 										$plt_graph_setting['graph_padding_left'] = 20;
 										$plt_graph_setting['legend_y_padding_top'] = 10;
-										$plt_graph_setting['value_multiplier'] = 5;
+										$plt_graph_setting['value_multiplier'] = $plt_graph_setting['graph_height']/$plt_graph_setting['y_max'];
 							        	?>
 							        	<div style="margin-bottom:10px;"><span style="background:rgba(0, 255, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>PLT</div>
 							            <canvas id="plt-chart" height="<?php echo $plt_graph_setting['graph_canvas_height'];?>" width="<?php echo $plt_graph_setting['graph_width'];?>"></canvas>
@@ -459,7 +459,7 @@ $x_wbcvalue = $arr[0]['wbc_value'];
 										$rbc_graph_setting['x_legend_position_adjustment'] = 2;
 										$rbc_graph_setting['graph_padding_left'] = 20;
 										$rbc_graph_setting['legend_y_padding_top'] = 10;
-										$plt_graph_setting['value_multiplier'] = 0.5;
+										$plt_graph_setting['value_multiplier'] = $rbc_graph_setting['graph_height']/$rbc_graph_setting['y_max'];
 							        	?>
 							        	<div style="margin-top:25px;margin-bottom:10px;"><span style="background:rgba(255, 0, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>RBC</div>
 							            <canvas id="rbc-chart" height="<?php echo $plt_graph_setting['graph_canvas_height'];?>" width="<?php echo $rbc_graph_setting['graph_width'];?>"></canvas>
@@ -562,7 +562,7 @@ $x_wbcvalue = $arr[0]['wbc_value'];
 										$wbc_graph_setting['x_legend_position_adjustment'] = 2;
 										$wbc_graph_setting['graph_padding_left'] = 20;
 										$wbc_graph_setting['legend_y_padding_top'] = 10;
-										$plt_graph_setting['value_multiplier'] = 3;
+										$plt_graph_setting['value_multiplier'] = $wbc_graph_setting['graph_height']/$wbc_graph_setting['y_max'];
 							        	?>
 							        	<div style="margin-top:25px;margin-bottom:10px;"><span style="background:rgba(255, 255, 0, 0.6);margin-right:10px;padding-left:20px;padding-right:20px;border:1px solid #d6d4d4;">&nbsp;</span>RBC</div>
 							            <canvas id="wbc-chart" height="<?php echo $plt_graph_setting['graph_canvas_height'];?>" width="<?php echo $wbc_graph_setting['graph_width'];?>"></canvas>
