@@ -20,7 +20,7 @@
             <a class="navbar-brand" href="{{ App\Models\Hospital::find(Auth::user()->id_rs)->link}}"
                style="padding-top: 0; ">
                 <img src="{{ asset('storage/'. App\Models\Hospital::find(Auth::user()->id_rs)->logo)}}"
-                     style="height: 72px;">
+                     style="height:100%;width:auto;">
             </a>
             @else
             <a href="#">

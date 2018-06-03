@@ -207,7 +207,8 @@ class ResultController extends Controller
 
             $pdf = PDF::loadView('result.summary.print', compact('result'))
                 ->setPaper('a4', 'landscape');
-            return $pdf->stream($id);
+            //return $pdf->stream($id);
+            return redirect()->back();
 
 //            return $pdf->download($id . '.pdf');
         } else {
