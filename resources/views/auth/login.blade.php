@@ -55,8 +55,7 @@
 								<label>Email</label>
 								<div class="input-group input-group-icon">
 									<input  type="email" name="email" type="text" class="form-control input-lg" value="{{ old('email') }}" required autofocus />
-									<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-					                @if ($errors->has('email'))
+									@if ($errors->has('email'))
 					                <span class="help-block">
 					                    <strong>{{ $errors->first('email') }}</strong>
 					                </span>
@@ -76,8 +75,7 @@
 								</div>
 								<div class="input-group input-group-icon">
 									<input  type="password" name="password" class="form-control input-lg" required />
-									<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-					                @if ($errors->has('password'))
+									@if ($errors->has('password'))
 					                                    <span class="help-block">
 					                                        <strong>{{ $errors->first('password') }}</strong>
 					                                    </span>
