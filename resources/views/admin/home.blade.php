@@ -508,7 +508,7 @@
 				<h2 class="panel-title">System Log</h2>
 			</header>
 			<div class="panel-body">
-				<div id="access-log" class="tab-pane active">
+				<div id="access-log" class="tab-pane active" style="max-height:500px;overflow-y:scroll;">
 					<table class="table table-striped table-no-more table-bordered  mb-none">
 						<thead>
 							<tr>
@@ -518,66 +518,98 @@
 							</tr>
 						</thead>
 						<tbody class="log-viewer">
-							<tr>
-								<td data-title="Type" class="pt-md pb-md">
-									<i class="fa fa-bug fa-fw text-muted text-md va-middle"></i>
-									<span class="va-middle">Debug</span>
-								</td>
-								<td data-title="Date" class="pt-md pb-md">
-									13/04/2016 18:25:59
-								</td>
-								<td data-title="Message" class="pt-md pb-md">
-									my.host - oh snap! another exception
-								</td>
-							</tr>
-							<tr>
-								<td data-title="Type" class="pt-md pb-md">
-									<i class="fa fa-info fa-fw text-info text-md va-middle"></i>
-									<span class="va-middle">Info</span>
-								</td>
-								<td data-title="Date" class="pt-md pb-md">
-									13/04/2016 21:50:17
-								</td>
-								<td data-title="Message" class="pt-md pb-md">
-									"GET / HTTP/1.1" 200 1225
-								</td>
-							</tr>
-							<tr>
-								<td data-title="Type" class="pt-md pb-md">
-									<i class="fa fa-warning fa-fw text-warning text-md va-middle"></i>
-									<span class="va-middle">Warning</span>
-								</td>
-								<td data-title="Date" class="pt-md pb-md">
-									13/04/2016 17:44:21
-								</td>
-								<td data-title="Message" class="pt-md pb-md">
-									DocumentRoot [/var/www/hebert_admin/] does not exist
-								</td>
-							</tr>
-							<tr>
-								<td data-title="Type" class="pt-md pb-md">
-									<i class="fa fa-times-circle fa-fw text-danger text-md va-middle"></i>
-									<span class="va-middle">Error</span>
-								</td>
-								<td data-title="Date" class="pt-md pb-md">
-									13/04/2016 21:55:18
-								</td>
-								<td data-title="Message" class="pt-md pb-md">
-									File does not exist: /var/www/hebert_admin/favicon.ico
-								</td>
-							</tr>
-							<tr>
-								<td data-title="Type" class="pt-md pb-md">
-									<i class="fa fa-ban fa-fw text-danger text-md va-middle"></i>
-									<span class="va-middle">Fatal</span>
-								</td>
-								<td data-title="Date" class="pt-md pb-md">
-									13/04/2016 22:13:39
-								</td>
-								<td data-title="Message" class="pt-md pb-md">
-									not a tree object
-								</td>
-							</tr>
+							<?php
+						$handle = fopen("http://localhost/development_site/osh/storage/logs/laravel.log", "r");
+						if ($handle) {
+						    while (($buffer = fgets($handle, 4096)) !== false ) {
+						    	
+						    	if( substr($buffer,1,4) == date('Y') ){
+						    	
+								    echo 
+							        '
+							        <tr>
+			                            <td data-title="Type" class="pt-md pb-md">
+			                                <i class="fa fa-times-circle fa-fw text-danger text-md va-middle"></i>
+			                                <span class="va-middle">Error</span>
+			                            </td>
+			                            <td data-title="Date" class="pt-md pb-md">
+			                                '.substr($buffer,1,19).'
+			                            </td>
+			                            <td data-title="Message" class="pt-md pb-md">
+			                                '.substr($buffer,22).'
+			                            </td>
+			                        </tr>
+							        ';    
+						        }
+						    }
+						    if (!feof($handle)) {
+						        echo "Error: unexpected fgets() fail\n";
+						    }
+						    fclose($handle);
+						}
+						?>
+						<!--
+                        <tr>
+                            <td data-title="Type" class="pt-md pb-md">
+                                <i class="fa fa-bug fa-fw text-muted text-md va-middle"></i>
+                                <span class="va-middle">Debug</span>
+                            </td>
+                            <td data-title="Date" class="pt-md pb-md">
+                                13/04/2016 18:25:59
+                            </td>
+                            <td data-title="Message" class="pt-md pb-md">
+                                my.host - oh snap! another exception
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-title="Type" class="pt-md pb-md">
+                                <i class="fa fa-info fa-fw text-info text-md va-middle"></i>
+                                <span class="va-middle">Info</span>
+                            </td>
+                            <td data-title="Date" class="pt-md pb-md">
+                                13/04/2016 21:50:17
+                            </td>
+                            <td data-title="Message" class="pt-md pb-md">
+                                "GET / HTTP/1.1" 200 1225
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-title="Type" class="pt-md pb-md">
+                                <i class="fa fa-warning fa-fw text-warning text-md va-middle"></i>
+                                <span class="va-middle">Warning</span>
+                            </td>
+                            <td data-title="Date" class="pt-md pb-md">
+                                13/04/2016 17:44:21
+                            </td>
+                            <td data-title="Message" class="pt-md pb-md">
+                                DocumentRoot [/var/www/hebert_admin/] does not exist
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-title="Type" class="pt-md pb-md">
+                                <i class="fa fa-times-circle fa-fw text-danger text-md va-middle"></i>
+                                <span class="va-middle">Error</span>
+                            </td>
+                            <td data-title="Date" class="pt-md pb-md">
+                                13/04/2016 21:55:18
+                            </td>
+                            <td data-title="Message" class="pt-md pb-md">
+                                File does not exist: /var/www/hebert_admin/favicon.ico
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-title="Type" class="pt-md pb-md">
+                                <i class="fa fa-ban fa-fw text-danger text-md va-middle"></i>
+                                <span class="va-middle">Fatal</span>
+                            </td>
+                            <td data-title="Date" class="pt-md pb-md">
+                                13/04/2016 22:13:39
+                            </td>
+                            <td data-title="Message" class="pt-md pb-md">
+                                not a tree object
+                            </td>
+                        </tr>
+                        -->
 						</tbody>
 					</table>
 				</div>
