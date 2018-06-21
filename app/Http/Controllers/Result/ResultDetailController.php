@@ -31,10 +31,10 @@ class ResultDetailController extends Controller
         $result = new ResultDetail($data);
 
         if ($result->save()) {
-            $roles = 'doctor';
-            $notification['text'] = 'Validasi '. $nm_lab->nama .' No. Lab '. $data['id_master'];
-
-            NotificationController::postNotification($data['id_master'], $roles, $notification);
+//            $roles = 'doctor';
+//            $notification['text'] = 'Validasi '. $nm_lab->nama .' No. Lab '. $data['id_master'];
+//
+//            NotificationController::postNotification($data['id_master'], $roles, $notification);
 
             notify()->flash("Input Data Berhasil", 'success', ['title' => "Success"]);
             return redirect()->route('result.summary.show', $data['id_master']);

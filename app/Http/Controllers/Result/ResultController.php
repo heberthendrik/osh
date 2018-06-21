@@ -13,9 +13,11 @@ use App\Models\Doctor;
 use App\Models\Officer;
 use App\Models\User;
 use App\Models\ResultDetail;
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Api\NotificationController;
 use PDF;
 
 class ResultController extends Controller
@@ -158,6 +160,11 @@ class ResultController extends Controller
         }
 
         if ($result->update($data)) {
+            $roles = 'officer';
+            $notification['text'] = 'Validasi #' . $id . ' Result: Approved';
+
+            NotificationController::postNotification($id, $roles, $notification);
+
             notify()->flash("Update Data Berhasil", 'success', ['title' => "Success"]);
             return redirect()->back();
         }
@@ -186,13 +193,10 @@ class ResultController extends Controller
 
     public function getPrint($id)
     {
-    
-    	exec('/usr/local/bin/wkhtmltoimage --width 1400 --crop-h 950 --quality 100 http://localhost/development_site/osh/custom-report-generator/?lid='.$id.' /Users/heberthendrikpelapelapon/Downloads/bbbb.png');
-    	
-    	exec('mv /Users/heberthendrikpelapelapon/Downloads/bbbb.png /Applications/MAMP/htdocs/development_site/osh/custom-report-generator/bbbb.png');
-    	
-		exec('open /Applications/MAMP/htdocs/development_site/osh/custom-report-generator/bbbb.png');
-    
+        exec('"'.config('wkhtml.address') . '" --width 1400 --crop-h 950 --quality 100 ' . config('wkhtml.local_address') . '/?lid=' . $id . ' ' . config('wkhtml.file_address') .''.$id.'.png');
+
+        exec('start ' . config('wkhtml.file_address') . ''.$id.'.png');
+
         $result = Result::with(['details' => function($query)
         {
             $query->orderBy('kd_acc')
@@ -207,12 +211,37 @@ class ResultController extends Controller
 
             $pdf = PDF::loadView('result.summary.print', compact('result'))
                 ->setPaper('a4', 'landscape');
-            //return $pdf->stream($id);
+//            return $pdf->stream($id);
             return redirect()->back();
 
 //            return $pdf->download($id . '.pdf');
         } else {
             return redirect()->back();
         }
+    }
+
+    public static function SendResultVerifikator($id)
+    {
+        $result = Result::find($id);
+
+        $data = [
+            'id_pemeriksa' => Auth::user()->id,
+            'nm_pemeriksa' => Auth::user()->name,
+            'kd_pemeriksa' => '1',
+            'dt_pemeriksa' => Carbon::now()
+        ];
+
+        if ($result->update($data)) {
+            $roles = 'doctor';
+            $notification['text'] = 'Validasi #' . $id;
+
+            NotificationController::postNotification($id, $roles, $notification);
+
+            notify()->flash("Data Berhasil dikirim ke Dokter", 'success', ['title' => "Success"]);
+            return redirect()->route('result.summary.show', $id);
+        }
+
+        notify()->flash("Update Data Gagal", 'error', ['title' => "Error"]);
+        return redirect()->back()->withErrors($result->getErrors())->withInput();
     }
 }

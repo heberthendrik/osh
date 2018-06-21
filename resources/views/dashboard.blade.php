@@ -8,7 +8,7 @@
     <div class="right-wrapper pull-right">
         <ol class="breadcrumbs">
             <li>
-                <a href="dashboard_admin.html">
+                <a href="{{route('home')}}">
                     <i class="fa fa-home"></i>
                 </a>
             </li>
@@ -30,7 +30,7 @@
                                     <h4 class="title">Today Lab Number</h4>
 
                                     <div class="info">
-                                        <strong class="amount">1281</strong>
+                                        <strong class="amount">{{ $data['today'] }}</strong>
                                     </div>
                                 </div>
                                 <div class="summary-footer">
@@ -50,7 +50,7 @@
                                     <h4 class="title">Today Completed Report</h4>
 
                                     <div class="info">
-                                        <strong class="amount">38</strong>
+                                        <strong class="amount">{{ $data['todayComplete'] }}</strong>
                                     </div>
                                 </div>
                                 <div class="summary-footer">
@@ -70,7 +70,7 @@
                                     <h4 class="title">Today Pending Approval</h4>
 
                                     <div class="info">
-                                        <strong class="amount">13</strong>
+                                        <strong class="amount">{{$data['todayPending']}}</strong>
                                     </div>
                                 </div>
                                 <div class="summary-footer">
@@ -90,7 +90,7 @@
                                     <h4 class="title">Number of Customer Today</h4>
 
                                     <div class="info">
-                                        <strong class="amount">{{$data['customer']}}</strong>
+                                        <strong class="amount">{{$data['todayCustomer']}}</strong>
                                     </div>
                                 </div>
                                 <div class="summary-footer">
@@ -119,49 +119,16 @@
                 <p class="panel-subtitle">Total lab data generated from 00.00 - 23.00 today.</p>
             </header>
             <div class="panel-body">
-
-                <!-- Flot: Basic -->
                 <div class="chart chart-md" id="flotDashBasic"></div>
                 <script>
-
                     var flotDashBasicData = [
                         {
-//                            data:[
-//                                [0, 170],
-//                                [1, 169],
-//                                [2, 173],
-//                                [3, 188],
-//                                [4, 147],
-//                                [5, 113],
-//                                [6, 128],
-//                                [7, 169],
-//                                [8, 173],
-//                                [9, 128],
-//                                [10, 128],
-//                                [11, 170],
-//                                [12, 169],
-//                                [13, 173],
-//                                [14, 188],
-//                                [15, 147],
-//                                [16, 113],
-//                                [17, 128],
-//                                [18, 169],
-//                                [19, 173],
-//                                [20, 128],
-//                                [21, 169],
-//                                [22, 188],
-//                                [23, 147]
-//
-//                            ],
-                            data:[<?php echo $hasil;?>],
+                            data:[<?php echo $data['MonthlyResult'];?>],
                             label:"Generated",
                             color:"#0088cc"
                         }
                     ];
-
-
                 </script>
-
             </div>
         </section>
     </div>
@@ -176,9 +143,7 @@
                     <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
                     <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
                 </div>
-
                 <h2 class="panel-title">Weekly Lab Statistic</h2>
-
                 <p class="panel-subtitle">Total lab occurance and lab report approval made within a week.</p>
             </header>
             <div class="panel-body">
@@ -196,76 +161,39 @@
                             </h2>
 
                             <div id="salesSelectorItems" class="chart-data-selector-items mt-sm">
-
                                 <div class="chart chart-sm" data-sales-rel="LabTotal" id="flotDashSales1"
                                      class="chart-active"></div>
                                 <script>
-
                                     var flotDashSales1Data = [
                                         {
-                                            data:[
-                                                ["Mon", 140],
-                                                ["Tue", 240],
-                                                ["Wed", 190],
-                                                ["Thu", 140],
-                                                ["Fri", 180],
-                                                ["Sat", 320],
-                                                ["Sun", 270]
-                                            ],
+                                            data:[<?php echo $data['WeeklyResult'];?>],
                                             color:"#0088cc"
                                         }
                                     ];
-
-
                                 </script>
-
 
                                 <div class="chart chart-sm" data-sales-rel="LabApproved" id="flotDashSales2"
                                      class="chart-hidden"></div>
                                 <script>
-
                                     var flotDashSales2Data = [
                                         {
-                                            data:[
-                                                ["Mon", 240],
-                                                ["Tue", 240],
-                                                ["Wed", 290],
-                                                ["Thu", 540],
-                                                ["Fri", 480],
-                                                ["Sat", 220],
-                                                ["Sun", 170]
-                                            ],
+                                            data:[<?php echo $data['WeeklyApproved'];?>],
                                             color:"#2baab1"
                                         }
                                     ];
-
-
                                 </script>
-
 
                                 <div class="chart chart-sm" data-sales-rel="LabPending" id="flotDashSales3"
                                      class="chart-hidden"></div>
                                 <script>
-
                                     var flotDashSales3Data = [
                                         {
-                                            data:[
-                                                ["Mon", 840],
-                                                ["Tue", 740],
-                                                ["Wed", 690],
-                                                ["Thu", 940],
-                                                ["Fri", 1180],
-                                                ["Sat", 820],
-                                                ["Sun", 570]
-                                            ],
+                                            data:[<?php echo $data['WeeklyPending'];?>],
                                             color:"#734ba9"
                                         }
                                     ];
-
-
                                 </script>
                             </div>
-
                         </div>
                     </div>
                     <div class="col-lg-4 text-center">
@@ -273,7 +201,7 @@
 
                         <div class="liquid-meter-wrapper liquid-meter-sm mt-lg">
                             <div class="liquid-meter">
-                                <meter min="0" max="100" value="35" id="meterSales"></meter>
+                                <meter min="0" max="100" value="{{$data['resultComplete']}}" id="meterSales"></meter>
                             </div>
                         </div>
                     </div>
@@ -343,84 +271,42 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @php $i=1;@endphp
+                        @foreach($data['latestData'] as $rsData)
                         <tr>
-                            <td>1</td>
-                            <td>#123</td>
-                            <td><span class="label label-success">Already Reviewed</span></td>
+                            <td>{{$i++}}</td>
+                            <td>{{$rsData->id}}</td>
+                            @php
+                            $value=33;
+                            $class = "label label-danger";
+                            $label = "Need Officer Approval";
+
+                            if($rsData->kd_pemeriksa){
+                            $value += 33;
+                            $class = "label label-warning";
+                            $label = "Need Doctor Approval";
+                            }
+
+                            if($rsData->kd_acc){
+                                $value += 34;
+                                $class = "label label-success";
+                                $label = "Already Reviewed";
+                            }
+                            @endphp
+                            <td>
+                                <span class="{{$class}}">{{$label}}</span>
+                            </td>
                             <td>
                                 <div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                        100%
+                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                         aria-valuenow="{{$value}}"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: {{$value}}%;">
+                                        {{$value}}%
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>#234</td>
-                            <td><span class="label label-success">Already Reviewed</span></td>
-                            <td>
-                                <div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                        100%
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>#345</td>
-                            <td><span class="label label-warning">Need Doctor Approval</span></td>
-                            <td>
-                                <div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                        60%
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>#456</td>
-                            <td><span class="label label-success">Already Reviewed</span></td>
-                            <td>
-                                <div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
-                                        90%
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>#567</td>
-                            <td><span class="label label-warning">Need Doctor Approval</span></td>
-                            <td>
-                                <div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                                        45%
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>#789</td>
-                            <td><span class="label label-success">Already Reviewed</span></td>
-                            <td>
-                                <div class="progress progress-sm progress-half-rounded mt-xs light">
-                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 95%;">
-                                        95%
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -529,11 +415,9 @@
                     <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
                     <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
                 </div>
-
                 <h2 class="panel-title">System Log</h2>
             </header>
             <div class="panel-body">
-            
                 <div id="access-log" class="tab-pane active" style="max-height:500px;overflow-y:scroll;">
                     <table class="table table-striped table-no-more table-bordered  mb-none">
                         <thead>
@@ -545,14 +429,12 @@
                         </thead>
                         <tbody class="log-viewer">
                         <?php
-						$handle = fopen("http://localhost/development_site/osh/storage/logs/laravel.log", "r");
-						if ($handle) {
-						    while (($buffer = fgets($handle, 4096)) !== false ) {
-						    	
-						    	if( substr($buffer,1,4) == date('Y') ){
-						    	
-								    echo 
-							        '
+                        $handle = fopen(storage_path('logs/laravel.log'), "r");
+                        if ($handle) {
+                            while (($buffer = fgets($handle, 4096)) !== false ) {
+                                if( substr($buffer,1,4) == date('Y') ){
+                                    echo
+                                       '
 							        <tr>
 			                            <td data-title="Type" class="pt-md pb-md">
 			                                <i class="fa fa-times-circle fa-fw text-danger text-md va-middle"></i>
@@ -565,77 +447,15 @@
 			                                '.substr($buffer,22).'
 			                            </td>
 			                        </tr>
-							        ';    
-						        }
-						    }
-						    if (!feof($handle)) {
-						        echo "Error: unexpected fgets() fail\n";
-						    }
-						    fclose($handle);
-						}
-						?>
-						<!--
-                        <tr>
-                            <td data-title="Type" class="pt-md pb-md">
-                                <i class="fa fa-bug fa-fw text-muted text-md va-middle"></i>
-                                <span class="va-middle">Debug</span>
-                            </td>
-                            <td data-title="Date" class="pt-md pb-md">
-                                13/04/2016 18:25:59
-                            </td>
-                            <td data-title="Message" class="pt-md pb-md">
-                                my.host - oh snap! another exception
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-title="Type" class="pt-md pb-md">
-                                <i class="fa fa-info fa-fw text-info text-md va-middle"></i>
-                                <span class="va-middle">Info</span>
-                            </td>
-                            <td data-title="Date" class="pt-md pb-md">
-                                13/04/2016 21:50:17
-                            </td>
-                            <td data-title="Message" class="pt-md pb-md">
-                                "GET / HTTP/1.1" 200 1225
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-title="Type" class="pt-md pb-md">
-                                <i class="fa fa-warning fa-fw text-warning text-md va-middle"></i>
-                                <span class="va-middle">Warning</span>
-                            </td>
-                            <td data-title="Date" class="pt-md pb-md">
-                                13/04/2016 17:44:21
-                            </td>
-                            <td data-title="Message" class="pt-md pb-md">
-                                DocumentRoot [/var/www/hebert_admin/] does not exist
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-title="Type" class="pt-md pb-md">
-                                <i class="fa fa-times-circle fa-fw text-danger text-md va-middle"></i>
-                                <span class="va-middle">Error</span>
-                            </td>
-                            <td data-title="Date" class="pt-md pb-md">
-                                13/04/2016 21:55:18
-                            </td>
-                            <td data-title="Message" class="pt-md pb-md">
-                                File does not exist: /var/www/hebert_admin/favicon.ico
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-title="Type" class="pt-md pb-md">
-                                <i class="fa fa-ban fa-fw text-danger text-md va-middle"></i>
-                                <span class="va-middle">Fatal</span>
-                            </td>
-                            <td data-title="Date" class="pt-md pb-md">
-                                13/04/2016 22:13:39
-                            </td>
-                            <td data-title="Message" class="pt-md pb-md">
-                                not a tree object
-                            </td>
-                        </tr>
-                        -->
+							        ';
+                                }
+                            }
+                            if (!feof($handle)) {
+                                echo "Error: unexpected fgets() fail\n";
+                            }
+                            fclose($handle);
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -643,8 +463,6 @@
         </section>
     </div>
 </div>
-
-
 
 <!--
 <section class="content-header">
@@ -799,37 +617,37 @@
 @section('scripts')
 <script src="{{asset('js/Chart.js')}}"></script>
 <script>
-<!--    $(function () {-->
-<!--        var jumlah = --><?php //echo $jumlah; ?><!--;-->
-<!---->
-<!--        var barChartData = {-->
-<!--            labels: --><?php //echo $tanggal; ?><!--,-->
-<!--            datasets:[-->
-<!--                {-->
-<!--                    label:'Jumlah',-->
-<!--                    pointStyle:'line',-->
-<!--                    backgroundColor:"rgba(0,255,0,0.5)",-->
-<!--                    data:jumlah-->
-<!--                }-->
-<!--            ]-->
-<!--        };-->
-<!---->
-<!--        var ctx = document.getElementById("customerChart").getContext("2d");-->
-<!--        window.myBar = new Chart(ctx, {-->
-<!--            type:'line',-->
-<!--            data:barChartData,-->
-<!--            options:{-->
-<!--                title:{-->
-<!--                    display:true,-->
-<!--                    text:'Jumlah Pemeriksaan Lab'-->
-<!--                },-->
-<!--                legend:{-->
-<!--                    display:true,-->
-<!--                    position:'bottom'-->
-<!--                }-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
+    <!--    $(function () {-->
+    <!--        var jumlah = --><?php //echo $jumlah; ?><!--;-->
+    <!---->
+    <!--        var barChartData = {-->
+    <!--            labels: --><?php //echo $tanggal; ?><!--,-->
+    <!--            datasets:[-->
+    <!--                {-->
+    <!--                    label:'Jumlah',-->
+    <!--                    pointStyle:'line',-->
+    <!--                    backgroundColor:"rgba(0,255,0,0.5)",-->
+    <!--                    data:jumlah-->
+    <!--                }-->
+    <!--            ]-->
+    <!--        };-->
+    <!---->
+    <!--        var ctx = document.getElementById("customerChart").getContext("2d");-->
+    <!--        window.myBar = new Chart(ctx, {-->
+    <!--            type:'line',-->
+    <!--            data:barChartData,-->
+    <!--            options:{-->
+    <!--                title:{-->
+    <!--                    display:true,-->
+    <!--                    text:'Jumlah Pemeriksaan Lab'-->
+    <!--                },-->
+    <!--                legend:{-->
+    <!--                    display:true,-->
+    <!--                    position:'bottom'-->
+    <!--                }-->
+    <!--            }-->
+    <!--        });-->
+    <!--    });-->
 </script>
 
 

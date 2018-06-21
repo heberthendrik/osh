@@ -34,6 +34,8 @@ Route::group([
     Route::get('getPrint/{id}', 'ResultController@getPrint')->name('getPrint');
     Route::get('getValidate/{id}', 'ResultController@getValidate')->name('getValidate');
     Route::get('getUnvalidate/{id}', 'ResultController@getUnvalidate')->name('getUnvalidate');
+    Route::get('SendResultVerifikator/{id}', 'ResultController@SendResultVerifikator')->name('SendResultVerifikator');
+
     Route::get('getValidateResult/{id}', 'ResultDetailController@getValidateResult')->name('getValidateResult');
     Route::get('getUnvalidateResult/{id}', 'ResultDetailController@getUnvalidateResult')->name('getUnvalidateResult');
 });

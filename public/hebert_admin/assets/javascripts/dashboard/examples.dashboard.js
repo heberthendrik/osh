@@ -229,10 +229,11 @@ Theme Version: 	1.5.5
 			},
 			yaxis: {
 				min: 0,
-				max: 200,
+//				max: 200,
 				color: 'rgba(0,0,0,0.1)'
 			},
 			xaxis: {
+                mode: 'categories',
 				color: 'rgba(0,0,0,0)'
 			},
 			tooltip: true,

@@ -94,14 +94,9 @@
                                 <div class="btn-group">
                                     <a class="btn btn-sm btn-default"
                                        href="{{route('result.summary.show', $data->id)}}">View</a>
-                                    @if(Auth::user()->roles == 'doctor')
-                                    @if(!$data->kd_acc)
+                                    @if(Auth::user()->roles == 'doctor' && $data->kd_acc != '1' && $data->kd_pemeriksa == '1')
                                     <a class="btn btn-sm btn-success" href="{{route('result.getValidate', $data->id)}}">Validasi</a>
-                                    @else
-                                    <a class="btn btn-sm btn-danger"
-                                       href="{{route('result.getUnvalidate', $data->id)}}">Batalkan Validasi</a>
-                                    @endif
-                                    @elseif(Auth::user()->roles == 'officer' && $data->kd_acc != '1')
+                                    @elseif(Auth::user()->roles == 'officer' && $data->kd_pemeriksa != '1')
                                     <a class="btn btn-sm btn-delete btn-danger" href="javascript:;"
                                        data-message="Anda akan menghapus data. Anda yakin?">Delete</a>
                                     @endif

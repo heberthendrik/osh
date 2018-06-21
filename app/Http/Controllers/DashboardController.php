@@ -24,20 +24,91 @@ class DashboardController extends Controller
     {
         $sliders = Slider::distinct()->get();
 
-        $tipe = request()->get('tipe', 'day');
         $filters = ApiController::getFilters();
-        $result = ApiController::getResults($filters)
-            ->select(DB::raw("date_trunc('" . $tipe . "', created_at) as tanggal"), DB::raw('count(id) as jumlah'))
+
+        $data['today'] = ApiController::getResults($filters)
+            ->where(DB::raw("date_trunc('day', created_at)"), Carbon::today())->get()
+            ->count();
+
+        $data['todayComplete'] = ApiController::getResults($filters)
+            ->where(DB::raw("date_trunc('day', created_at)"), Carbon::today())->get()
+            ->where("kd_acc", '1')
+            ->count();
+
+        $data['todayPending'] = $data['today'] - $data['todayComplete'];
+
+        $data['todayCustomer'] = ApiController::getResults($filters)
+            ->select('no_rm')
+            ->where(DB::raw("date_trunc('day', created_at)"), Carbon::today())
+            ->groupBy('no_rm')->get()
+            ->count();
+
+        $limit = 29;
+        $last = Carbon::today()->subDays($limit);
+        $resultGenerated = ApiController::getResults($filters)->select(DB::raw("date_trunc('day', created_at) as tanggal"), DB::raw('count(id) as jumlah'))
+            ->where(DB::raw("date_trunc('day', created_at)"), '>=', Carbon::today()->subDays($limit))
             ->groupBy('tanggal')
-            ->orderBy('tanggal')
-            ->get();
-        $i=0;
-        foreach ($result as $res) {
-//           $hasil2[] = "[".Carbon::parse($res->tanggal)->format('d F Y') .", ".$res->jumlah."]";
-            $hasil2[] = "[". $i .", ".$res->jumlah."]";
-            $i++;
+            ->orderBy('tanggal');
+
+        $resultApproved = ApiController::getResults($filters)->select(DB::raw("date_trunc('day', dt_acc) as tanggal"), DB::raw('count(id) as jumlah'))
+            ->where(DB::raw("date_trunc('day', dt_acc)"), '>=', Carbon::today()->subDays($limit))
+            ->groupBy('tanggal')
+            ->orderBy('tanggal');
+
+        for ($j = 0; $j <= $limit; $j++) {
+            $resultMonthly = $resultGenerated->where(DB::raw("date_trunc('day', created_at)"), $last);
+            $countMonthly = $resultMonthly->get();
+
+            $resultMonthlyApproved = $resultApproved->where(DB::raw("date_trunc('day', created_at)"), $last);
+            $countMonthlyApproved = $resultApproved->get();
+
+            if ($countMonthly->count() > 0) {
+                $valueMonthly = $resultMonthly->first()->jumlah;
+            } else {
+                $valueMonthly = 0;
+            }
+
+            if ($countMonthlyApproved->count() > 0) {
+                $valueMonthlyApproved = $resultMonthlyApproved->first()->jumlah;
+            } else {
+                $valueMonthlyApproved = 0;
+            }
+
+            $hasilDaily[$j] = $valueMonthly;
+            $hasilDailyApproved[$j] = $valueMonthlyApproved;
+
+            $hasilMonthly[$j] = "['" . $last->format('d F') . "', " . $valueMonthly . "]";
+            $hasilMonthlyApproved[$j] = "['" . $j . "', " . $valueMonthlyApproved . "]";
+            $last->addDay();
         }
-        $hasil = implode(", ", $hasil2);
+        $data['MonthlyResult'] = implode(",", $hasilMonthly);
+        $data['MonthlyResultApproved'] = implode(",", $hasilMonthlyApproved);
+
+        $limitWeekly = 6;
+        $lastWeekly = Carbon::today()->subDays($limitWeekly);
+        $gap = $limit-$limitWeekly;
+
+        for ($k = 0; $k <= $limitWeekly; $k++) {
+            $valueWeeklyGenerated = $hasilDaily[$k + $gap];
+            $valueWeeklyApproved = $hasilDailyApproved[$k+$gap];
+
+            $valueWeeklyPending = $valueWeeklyGenerated - $valueWeeklyApproved;
+
+            $hasilWeeklyGenerated[$k] = "['" . $lastWeekly->format('l') . "', " . $valueWeeklyGenerated . "]";
+            $hasilWeeklyApproved[$k] = "['" . $lastWeekly->format('l') . "', " . $valueWeeklyApproved . "]";
+            $hasilWeeklyPending[$k] = "['" . $lastWeekly->format('l') . "', " . $valueWeeklyPending . "]";
+
+            $lastWeekly->addDay();
+        }
+
+        $data['WeeklyResult'] = implode(",", $hasilWeeklyGenerated);
+        $data['WeeklyApproved'] = implode(",", $hasilWeeklyApproved);
+        $data['WeeklyPending'] = implode(",", $hasilWeeklyPending);
+
+        $totalAll = ApiController::getResults($filters)->get()->count();
+        $totalComplete = ApiController::getResults($filters)->where("kd_acc", '1')->get()->count();
+
+        $data['resultComplete'] = isset($totalAll) ? ($totalComplete / $totalAll) * 100 : '0';
 
         $customer = Customer::distinct();
         ApiController::visibleData($customer);
@@ -67,6 +138,8 @@ class DashboardController extends Controller
             $data['above40'] = ($rsCustomer->above40 / $data['customer']) * 100;
         }
 
-        return view('dashboard', compact('filters', 'sliders', 'data', 'hasil'));
+        $data['latestData'] = ApiController::getResults($filters)->where('dt_print', NULL)->orderBy('id', 'DESC')->get();
+
+        return view('dashboard', compact('filters', 'sliders', 'data'));
     }
 }

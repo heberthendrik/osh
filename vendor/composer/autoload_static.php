@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit91367f9577e6c52b4fa0ddf2aea2dfb2
+class ComposerStaticInit3dfa93b689573bd6364e6ae8b1afdb03
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -485,6 +485,7 @@ class ComposerStaticInit91367f9577e6c52b4fa0ddf2aea2dfb2
         'Barryvdh\\DomPDF\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/ServiceProvider.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
+        'Carbon\\CarbonPeriod' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonPeriod.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
         'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
@@ -3103,6 +3104,7 @@ class ComposerStaticInit91367f9577e6c52b4fa0ddf2aea2dfb2
         'Psy\\Command\\SudoCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/SudoCommand.php',
         'Psy\\Command\\ThrowUpCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/ThrowUpCommand.php',
         'Psy\\Command\\TimeitCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/TimeitCommand.php',
+        'Psy\\Command\\TimeitCommand\\TimeitVisitor' => __DIR__ . '/..' . '/psy/psysh/src/Command/TimeitCommand/TimeitVisitor.php',
         'Psy\\Command\\TraceCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/TraceCommand.php',
         'Psy\\Command\\WhereamiCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/WhereamiCommand.php',
         'Psy\\Command\\WtfCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/WtfCommand.php',
@@ -3145,7 +3147,9 @@ class ComposerStaticInit91367f9577e6c52b4fa0ddf2aea2dfb2
         'Psy\\Readline\\Libedit' => __DIR__ . '/..' . '/psy/psysh/src/Readline/Libedit.php',
         'Psy\\Readline\\Readline' => __DIR__ . '/..' . '/psy/psysh/src/Readline/Readline.php',
         'Psy\\Readline\\Transient' => __DIR__ . '/..' . '/psy/psysh/src/Readline/Transient.php',
+        'Psy\\Reflection\\ReflectionClassConstant' => __DIR__ . '/..' . '/psy/psysh/src/Reflection/ReflectionClassConstant.php',
         'Psy\\Reflection\\ReflectionConstant' => __DIR__ . '/..' . '/psy/psysh/src/Reflection/ReflectionConstant.php',
+        'Psy\\Reflection\\ReflectionConstant_' => __DIR__ . '/..' . '/psy/psysh/src/Reflection/ReflectionConstant_.php',
         'Psy\\Reflection\\ReflectionLanguageConstruct' => __DIR__ . '/..' . '/psy/psysh/src/Reflection/ReflectionLanguageConstruct.php',
         'Psy\\Reflection\\ReflectionLanguageConstructParameter' => __DIR__ . '/..' . '/psy/psysh/src/Reflection/ReflectionLanguageConstructParameter.php',
         'Psy\\Shell' => __DIR__ . '/..' . '/psy/psysh/src/Shell.php',
@@ -4054,11 +4058,11 @@ class ComposerStaticInit91367f9577e6c52b4fa0ddf2aea2dfb2
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit91367f9577e6c52b4fa0ddf2aea2dfb2::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit91367f9577e6c52b4fa0ddf2aea2dfb2::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit91367f9577e6c52b4fa0ddf2aea2dfb2::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit91367f9577e6c52b4fa0ddf2aea2dfb2::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit91367f9577e6c52b4fa0ddf2aea2dfb2::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3dfa93b689573bd6364e6ae8b1afdb03::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3dfa93b689573bd6364e6ae8b1afdb03::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit3dfa93b689573bd6364e6ae8b1afdb03::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit3dfa93b689573bd6364e6ae8b1afdb03::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit3dfa93b689573bd6364e6ae8b1afdb03::$classMap;
 
         }, null, ClassLoader::class);
     }
